@@ -2,6 +2,7 @@ package com.github.dnvriend.controllers;
 
 import com.github.dnvriend.status.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -22,7 +23,7 @@ public class PersonController {
 
     @PutMapping()
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void putPerson(@RequestBody Person person) {
+    public void putPerson(@RequestBody @NonNull Person person) {
         people.put(person.id, person);
     }
 }

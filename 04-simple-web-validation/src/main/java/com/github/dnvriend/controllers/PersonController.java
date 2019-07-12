@@ -3,6 +3,7 @@ package com.github.dnvriend.controllers;
 import com.github.dnvriend.status.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,8 @@ public class PersonController {
 
     private final PersonService personService;
 
-    public PersonController(Map<Integer, Person> people, PersonService personService) {
+    public PersonController(@NonNull Map<Integer, Person> people,
+                            @NonNull PersonService personService) {
         this.people = people;
         this.personService = personService;
     }
@@ -37,18 +39,18 @@ public class PersonController {
 
     @PutMapping()
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void putPerson(@Valid @RequestBody Person person) {
+    public void putPerson(@Valid @RequestBody @NonNull Person person) {
         people.put(person.getId(), person);
     }
 
     @PutMapping("/validate")
-    public void savePerson(@RequestBody Person person) {
+    public void savePerson(@RequestBody @NonNull Person person) {
         people.put(person.getId(), personService.validatePerson(person));
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
+    ResponseEntity<String> handleConstraintViolationException(@NonNull ConstraintViolationException e) {
         return new ResponseEntity<>("not valid due to validation error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
