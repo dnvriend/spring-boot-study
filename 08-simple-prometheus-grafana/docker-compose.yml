@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  # https://hub.docker.com/r/prom/prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+    command: "--config.file=/etc/prometheus/prometheus.yml"
+
+
+  # https://hub.docker.com/r/grafana/grafana
+  # user:pass = admin:admin
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"

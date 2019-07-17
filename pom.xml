@@ -27,6 +27,9 @@
         <module>03-simple-validation</module>
         <module>04-simple-web-validation</module>
         <module>05-simple-spel</module>
+        <module>06-type-conversion</module>
+        <module>07-simple-actuator</module>
+        <module>08-simple-prometheus-grafana</module>
     </modules>
 
     <dependencyManagement>
