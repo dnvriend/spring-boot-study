@@ -30,6 +30,7 @@
         <module>06-type-conversion</module>
         <module>07-simple-actuator</module>
         <module>08-simple-prometheus-grafana</module>
+        <module>09-simple-jpa-data-web</module>
     </modules>
 
     <dependencyManagement>
