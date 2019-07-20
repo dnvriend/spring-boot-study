@@ -31,6 +31,8 @@
         <module>07-simple-actuator</module>
         <module>08-simple-prometheus-grafana</module>
         <module>09-simple-jpa-data-web</module>
+        <module>10-springfox-swagger</module>
+        <module>11-simple-web-versioning</module>
     </modules>
 
     <dependencyManagement>
