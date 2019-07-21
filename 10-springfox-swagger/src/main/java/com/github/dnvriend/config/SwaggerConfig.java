@@ -34,7 +34,7 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .build()
-                .pathMapping("/swagger")
+                .pathMapping("/")
                 .protocols(List.of("https").toJavaSet())
                 .apiInfo(apiInfo(title, String.format("%s - %s", version, gitCommit), description));
     }

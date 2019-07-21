@@ -1,4 +1,4 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controllers.v2;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Person {
-    int id;
-    String name;
-    int age;
+    private int id;
+    private String name;
+    private int age;
 }
