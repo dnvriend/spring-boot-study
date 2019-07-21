@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Converter
-public class IntervalConverter implements AttributeConverter<Interval, String> {
+public class IntervalAttributeConverter implements AttributeConverter<Interval, String> {
     @Override
     public String convertToDatabaseColumn(Interval attribute) {
         return Optional.ofNullable(attribute)

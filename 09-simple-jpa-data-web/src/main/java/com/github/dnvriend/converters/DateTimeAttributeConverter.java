@@ -1,6 +1,6 @@
 package com.github.dnvriend.converters;
 
-import org.joda.time.Period;
+import org.joda.time.DateTime;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
@@ -8,18 +8,18 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Converter
-public class PeriodConverter implements AttributeConverter<Period, String> {
+public class DateTimeAttributeConverter implements AttributeConverter<DateTime, String> {
     @Override
-    public String convertToDatabaseColumn(Period attribute) {
+    public String convertToDatabaseColumn(DateTime attribute) {
         return Optional.ofNullable(attribute)
                 .map(Objects::toString)
                 .orElse(null);
     }
 
     @Override
-    public Period convertToEntityAttribute(String dbData) {
+    public DateTime convertToEntityAttribute(String dbData) {
         return Optional.ofNullable(dbData)
-                .map(Period::parse)
+                .map(DateTime::parse)
                 .orElse(null);
     }
 }

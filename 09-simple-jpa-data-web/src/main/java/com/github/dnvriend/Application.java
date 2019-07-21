@@ -1,6 +1,6 @@
 package com.github.dnvriend;
 
-import com.github.dnvriend.converters.DateTimeConverter;
+import com.github.dnvriend.converters.DateTimeAttributeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -49,9 +49,9 @@ class Triple {
     @EmbeddedId
     private TripleKeyId id;
     private String value;
-    @Convert(converter = DateTimeConverter.class)
+    @Convert(converter = DateTimeAttributeConverter.class)
     private DateTime start;
-    @Convert(converter = DateTimeConverter.class)
+    @Convert(converter = DateTimeAttributeConverter.class)
     private DateTime end;
 }
 
