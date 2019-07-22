@@ -36,6 +36,7 @@
         <module>10-springfox-swagger</module>
         <module>11-simple-web-versioning</module>
         <module>12-simple-jpa-data-web-avro</module>
+        <module>13-simple-jpa-data-index</module>
     </modules>
 
     <dependencyManagement>

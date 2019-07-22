@@ -1,6 +1,15 @@
 # spring-boot-study
 A small study project on spring-boot with Java
 
+## HTTP
+
+```bash
+# get
+$ http :8080/k1/k2/k3/2019-01-01T09:00:00.000Z/2019-01-01T13:00:00.000Z
+$ 
+
+```
+
 ## Resources
 - [spring-boot-reference](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
 - [spring-framework](https://spring.io/projects/spring-framework)
