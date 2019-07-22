@@ -1,5 +1,6 @@
 package com.github.dnvriend.controllers;
 
+import com.github.dnvriend.services.DateTimeIntervalValidator;
 import com.github.dnvriend.services.TripleService;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
@@ -20,9 +21,12 @@ public class TripleController {
 
     private final ConversionService conversionService;
 
-    public TripleController(TripleService tripleService, ConversionService conversionService) {
+    private final DateTimeIntervalValidator dateTimeIntervalValidator;
+
+    public TripleController(TripleService tripleService, ConversionService conversionService, DateTimeIntervalValidator dateTimeIntervalValidator) {
         this.tripleService = tripleService;
         this.conversionService = conversionService;
+        this.dateTimeIntervalValidator = dateTimeIntervalValidator;
     }
 
     @PutMapping("/{k1}/{k2}/{k3}/{start}/{end}")
@@ -33,6 +37,7 @@ public class TripleController {
             @PathVariable("start") @NonNull DateTime start,
             @PathVariable("end") @NonNull DateTime end,
             @RequestBody @NonNull Value value) {
+        dateTimeIntervalValidator.validate(start, end);
         if(tripleService.exists(k1, k2, k3, start, end)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Resource already exists");
         }
@@ -47,6 +52,7 @@ public class TripleController {
             @PathVariable("k3") @NonNull String k3,
             @PathVariable("start") @NonNull DateTime start,
             @PathVariable("end") @NonNull DateTime end) {
+        dateTimeIntervalValidator.validate(start, end);
         tripleService.findOne(k1, k2, k3, start, end)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         String.format("Triple not found: %s/%s/%s/%s/%s", k1, k2, k3, start, end)));
@@ -60,7 +66,7 @@ public class TripleController {
             @PathVariable("k3") @NonNull String k3,
             @PathVariable("start") @NonNull DateTime start,
             @PathVariable("end") @NonNull DateTime end) {
-
+        dateTimeIntervalValidator.validate(start, end);
         Interval interval = new Interval(start, end);
         return tripleService.findById(k1, k2, k3)
                 .filter(tripleWithInterval -> {

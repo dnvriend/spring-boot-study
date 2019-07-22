@@ -7,3 +7,9 @@
 - [Hibernate Query Plan Cache](https://www.baeldung.com/hibernate-query-plan-cache)
 - [Java Bean Validation Basics](https://www.baeldung.com/javax-validation)
 - [Validating Input to a Spring MVC Controller](https://reflectoring.io/bean-validation-with-spring-boot/)
+- [Data with Spring Boot](https://www.baeldung.com/spring-boot-data-sql-and-schema-sql)
+- [Validating RequestParams and PathVariables in Spring](https://www.baeldung.com/spring-validate-requestparam-pathvariable)
+- [Dynamic Validation with Spring Boot Validation](https://blog.codecentric.de/en/2017/11/dynamic-validation-spring-boot-validation/)
+- [Validation in Spring Boot](https://www.baeldung.com/spring-boot-bean-validation)
+- [Guide to Spring Data REST Validators](https://www.baeldung.com/spring-data-rest-validators)
+
