@@ -38,6 +38,7 @@
         <module>12-simple-jpa-data-web-avro</module>
         <module>13-simple-jpa-data-index</module>
         <module>14-simple-jpa-data-timestamp</module>
+        <module>15-simple-prometheus-custom-metrics</module>
     </modules>
 
     <dependencyManagement>

@@ -1,13 +1,32 @@
-# 08-simple-prometheus-grafana
-
-## Actuator endpoint
-The actuator endpoint is available at: `http://localhost:8080/actuator`
-
-## Health endpoint 
-The health endpoint is available at: `http://localhost:8080/actuator/health`
+# 15-simple-prometheus-custom-metrics
 
 ## Prometheus endpoint
 The prometheus endpoint is available at: `http://localhost:8080/actuator/prometheus`
+
+## Prometheus
+After `docker-compose up`, Prometheus is available at: `http://localhost:9090`
+
+## Grafana
+After `docker-compose up`, Grafana is available at: `http://localhost:3000` 
+
+## Grafana and Prometheus
+Login in to Grafana, and add a Prometheus datasource. Configure:
+
+```bash
+URL: http://localhost:9090
+Access: Browser
+Scrape interval: 15s
+Query timeout: 60s
+HTTP Method: GET
+```
+
+## To load test
+For load testing I use [vegeta](https://github.com/tsenart/vegeta).
+
+```bash
+$ brew install vegeta
+$ echo "GET http://localhost:8080/person" | vegeta attack -duration=600s | vegeta report
+```
 
 ## Resources
 - [Spring Boot Actuator: Health check, Auditing, Metrics gathering and Monitoring](https://www.callicoder.com/spring-boot-actuator/)
