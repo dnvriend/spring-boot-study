@@ -21,7 +21,7 @@ public class PersonController {
         this.personStatsProbe = personStatsProbe;
     }
 
-    @GetMapping("")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Collection<Person> getPersons() {
         personStatsProbe.incrementGetPersonCounter();
