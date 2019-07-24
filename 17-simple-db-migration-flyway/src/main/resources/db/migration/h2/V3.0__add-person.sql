@@ -1,0 +1,1 @@
+insert into person (id, name, age, email) values (1, 'dnvriend', 42, 'dnvriend@gmail.com');

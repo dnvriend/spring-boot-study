@@ -40,6 +40,7 @@
         <module>14-simple-jpa-data-timestamp</module>
         <module>15-simple-prometheus-custom-metrics</module>
         <module>16-simple-web-filter</module>
+        <module>17-simple-db-migration-flyway</module>
     </modules>
 
     <dependencyManagement>
