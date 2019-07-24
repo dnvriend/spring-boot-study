@@ -26,6 +26,25 @@ For load testing I use [vegeta](https://github.com/tsenart/vegeta).
 ```bash
 $ brew install vegeta
 $ echo "GET http://localhost:8080/person" | vegeta attack -duration=600s | vegeta report
+$ echo "GET http://localhost:8080/person/1" | vegeta attack -duration=600s -rate=35 | vegeta report
+$ echo "GET http://localhost:8080/person" | vegeta attack -duration=600s -rate=25 | vegeta report
+```
+
+## Grafana queries:
+The following queries can be created:
+
+```bash
+# get the rate of http status code that has been tagged with {code = '200'} over the last [10s] (gauge)
+rate(person_http_status_code_total{code='200'}[10s])
+
+# for statuscode 404 (gauge)
+rate(person_http_status_code_total{code='404'}[10s])
+
+# get person by id counter (graph)
+rate(person_counter_get_by_id_total[10s])
+
+# get person counter (graph)
+rate(person_counter_get_total[10s])
 ```
 
 ## Resources
