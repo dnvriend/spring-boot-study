@@ -15,20 +15,22 @@ public class PersonStatsProbe implements MeterBinder {
 
     @Override
     public void bindTo(MeterRegistry registry) {
-        Gauge.builder("person_counter_put", this, value -> putPersonCounter.get())
-                .description("number of persons put")
-                .baseUnit("total")
-                .register(registry);
-
-        Gauge.builder("person_counter_get", this, value -> getPersonCounter.get())
-                .description("number of persons get")
-                .baseUnit("total")
-                .register(registry);
-
-        Gauge.builder("person_counter_get_by_id", this, value -> getPersonByIdCounter.get())
-                .description("number of persons get by id")
-                .baseUnit("total")
-                .register(registry);
+        // a gauge is for values that can go up or down.
+        // For values that can go only up, just use a counter...
+//        Gauge.builder("person_counter_put", this, value -> putPersonCounter.get())
+//                .description("number of persons put")
+//                .baseUnit("total")
+//                .register(registry);
+//
+//        Gauge.builder("person_counter_get", this, value -> getPersonCounter.get())
+//                .description("number of persons get")
+//                .baseUnit("total")
+//                .register(registry);
+//
+//        Gauge.builder("person_counter_get_by_id", this, value -> getPersonByIdCounter.get())
+//                .description("number of persons get by id")
+//                .baseUnit("total")
+//                .register(registry);
     }
 
     public void incrementPutPersonCounter() {

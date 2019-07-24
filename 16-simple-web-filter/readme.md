@@ -5,3 +5,4 @@ To create a filter, follow these steps:
 
 ## Resources
 - [How to Define a Spring Boot Filter?](https://www.baeldung.com/spring-boot-add-filter)
+- [Error Handling for REST with Spring](https://www.baeldung.com/exception-handling-for-rest-with-spring)

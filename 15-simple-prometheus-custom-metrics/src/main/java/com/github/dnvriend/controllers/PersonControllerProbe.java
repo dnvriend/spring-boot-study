@@ -10,14 +10,14 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-@RestController
-@RequestMapping("/person")
-public class PersonController {
+//@RestController
+//@RequestMapping("/person")
+public class PersonControllerProbe {
     private Map<Integer, Person> people = new ConcurrentHashMap<>();
 
     private final PersonStatsProbe personStatsProbe;
 
-    public PersonController(PersonStatsProbe personStatsProbe) {
+    public PersonControllerProbe(PersonStatsProbe personStatsProbe) {
         this.personStatsProbe = personStatsProbe;
     }
 
