@@ -24,7 +24,7 @@ spring:
   level:
     root: info
     org.hibernate: info
-    org.flyway: info
+    org.flywaydb: info
 server:
   port: 8080
 
