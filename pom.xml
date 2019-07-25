@@ -41,6 +41,7 @@
         <module>15-simple-prometheus-custom-metrics</module>
         <module>16-simple-web-filter</module>
         <module>17-simple-db-migration-flyway</module>
+        <module>18-simple-web-kotlin</module>
     </modules>
 
     <dependencyManagement>
