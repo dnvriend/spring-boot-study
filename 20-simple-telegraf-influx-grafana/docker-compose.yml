@@ -1,0 +1,39 @@
+version: "3.7"
+
+services:
+  # InfluxDB is an open source time series database for recording metrics, events, and analytics.
+  # https://hub.docker.com/_/influxdb
+  influxdb:
+    image: influxdb:latest
+    ports:
+      - "8086:8086" # http api port
+      - "8083:8083" # admin interface port, The administrator interface is deprecated as of 1.1.0 and will be removed in 1.3.0.
+      - "2003:2003" # graphite port
+    environment:
+      - "INFLUXDB_REPORTING_DISABLED=true"
+      - "INFLUXDB_DATA_QUERY_LOG_ENABLED=true"
+      - "INFLUXDB_GRAPHITE_ENABLED=true"
+      - "INFLUXDB_ADMIN_ENABLED=true"
+      - "INFLUXDB_HTTP_AUTH_ENABLED=false"
+
+  telegraf:
+    # Telegraf is an agent for collecting metrics and writing them to InfluxDB or other outputs.
+    # https://hub.docker.com/_/telegraf
+    image: telegraf:latest
+    ports:
+      - "8125:8125" # StatsD
+      - "8092:8092" # UDP
+      - "8094:8094" # TCP
+    environment:
+      - "INFLUXDB_REPORTING_DISABLED=true"
+      - "INFLUXDB_DATA_QUERY_LOG_ENABLED=true"
+      - "INFLUXDB_GRAPHITE_ENABLED=true"
+      - "INFLUXDB_ADMIN_ENABLED=true"
+      - "INFLUXDB_HTTP_AUTH_ENABLED=false"
+
+  # https://hub.docker.com/r/grafana/grafana
+  # user:pass = admin:admin
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"

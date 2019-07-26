@@ -1,6 +1,8 @@
 version: "3.7"
 
 services:
+  # https://prometheus.io/
+  # a time series database that can de queried with promQL and integrates with Grafana
   # https://hub.docker.com/r/prom/prometheus
   prometheus:
     image: prom/prometheus:latest

@@ -12,7 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
-        <junit.jupiter.version>5.5.0</junit.jupiter.version>
+        <junit.jupiter.version>5.5.1</junit.jupiter.version>
         <apache.avro.version>1.9.0</apache.avro.version>
         <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
     </properties>
@@ -43,6 +43,8 @@
         <module>17-simple-db-migration-flyway</module>
         <module>18-simple-web-kotlin</module>
         <module>19-simple-assertj-junit5</module>
+        <module>20-simple-telegraf-influx-grafana</module>
+        <module>21-simple-vavr-web-data</module>
     </modules>
 
     <dependencyManagement>
@@ -51,6 +53,11 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.18.8</version>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>1.4.199</version>
             </dependency>
             <dependency>
                 <groupId>javax.validation</groupId>
@@ -93,15 +100,35 @@
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${springfox.swagger2.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.18.8</version>
-            </dependency>
+            <!-- provides persistent data types and functional control structures -->
             <dependency>
                 <groupId>io.vavr</groupId>
                 <artifactId>vavr</artifactId>
+                <version>0.10.1</version>
+            </dependency>
+            <!-- structural pattern matching -->
+            <dependency>
+                <groupId>io.vavr</groupId>
+                <artifactId>vavr-match</artifactId>
+                <version>0.10.1</version>
+            </dependency>
+            <!-- jackson data type module -->
+            <dependency>
+                <groupId>io.vavr</groupId>
+                <artifactId>vavr-jackson</artifactId>
                 <version>0.10.0</version>
+            </dependency>
+            <!-- property testing -->
+            <dependency>
+                <groupId>io.vavr</groupId>
+                <artifactId>vavr-test</artifactId>
+                <version>0.10.1</version>
+            </dependency>
+            <!-- A rendering library, currently housing graph renderers -->
+            <dependency>
+                <groupId>io.vavr</groupId>
+                <artifactId>vavr-render</artifactId>
+                <version>0.10.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.avro</groupId>
@@ -138,6 +165,12 @@
                 <artifactId>avro-maven-plugin</artifactId>
                 <version>${apache.avro.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>3.11.1</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -169,8 +202,6 @@
                             <phase>generate-sources</phase>
                             <goals>
                                 <goal>schema</goal>
-<!--                                <goal>protocol</goal>-->
-<!--                                <goal>idl-protocol</goal>-->
                             </goals>
                             <configuration>
                                 <sourceDirectory>${project.basedir}/src/main/resources/avro/</sourceDirectory>
@@ -198,6 +229,36 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>org.assertj</groupId>
+                    <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
+                    <version>2.1.0</version>
+                    <executions>
+                        <execution>
+                            <phase>generate-test-sources</phase>
+                            <goals>
+                                <goal>generate-assertions</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.22.0</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
             </plugins>
         </pluginManagement>
     </build>

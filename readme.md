@@ -15,3 +15,4 @@ $
 - [Maven - multi-module project](https://www.baeldung.com/maven-multi-module)
 - [JUnit5](https://www.baeldung.com/junit-5)
 - [Assertj](https://joel-costigliola.github.io/assertj/)
+- [Jackson Improvements in Spring](https://spring.io/blog/2014/12/02/latest-jackson-integration-improvements-in-spring)
