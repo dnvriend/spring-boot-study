@@ -13,8 +13,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-      naming:
-        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
     show-sql: true
   main:
     banner-mode: log

@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  # credentials: root:admin
+  # jdbc:mysql://localhost:3306/mydb
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=admin"
+      - "MYSQL_DATABASE=mydb"

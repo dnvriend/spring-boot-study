@@ -4,7 +4,7 @@ spring:
       enabled: true
       path: /h2_console
   datasource:
-    url: jdbc:h2:mem:simple-jpa-data-web
+    url: jdbc:h2:mem:mydb
     username: sa
     password:
     driverClassName=: org.h2.Driver
@@ -12,17 +12,11 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
-  main:
-    banner-mode: log
-
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
   flyway:
     enabled: true
     locations: "classpath:db/migration/{vendor}"
-    checkLocation: true
-  level:
-    root: info
-    org.hibernate: info
-    org.flywaydb: info
-server:
-  port: 8080
-
+    check-location: false
+    baseline-on-migrate: true

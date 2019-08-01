@@ -45,6 +45,7 @@
         <module>19-simple-assertj-junit5</module>
         <module>20-simple-telegraf-influx-grafana</module>
         <module>21-simple-vavr-web-data</module>
+        <module>22-simple-jpa-mysql</module>
     </modules>
 
     <dependencyManagement>
@@ -58,6 +59,11 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>1.4.199</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.16</version>
             </dependency>
             <dependency>
                 <groupId>javax.validation</groupId>
