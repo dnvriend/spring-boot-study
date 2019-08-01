@@ -81,6 +81,65 @@ By default, the physical name will be the same as the logical name that we speci
 
 If we want to customize the physical names, we can create a custom PhysicalNamingStrategy class.
 
+## ImplicitNamingStrategyComponentPathImpl
+The `ImplicitNamingStrategyComponentPathImpl` naming strategy prefixes the logical name of the class property with the name
+of the field. Eg. when you have an embedded primary key, the strategy will prefix the name of the fields of the primary key
+with the name of the field. Eg:
+
+The composite key:
+
+```java
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Embeddable
+public class TripleKeyId implements Serializable {
+    private String k1;
+    private String k2;
+    private String k3;
+    @Convert(converter = DateTimeAttributeConverter.class)
+    private DateTime start;
+    @Convert(converter = DateTimeAttributeConverter.class)
+    private DateTime end;
+}
+```
+
+The entity:
+
+```java
+package com.github.dnvriend.repositories;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity(name = "triple")
+@Table(indexes = {
+        @Index(name = "KEYS_INDEX", columnList = "id_k1, id_k2, id_k3"),
+        @Index(name = "KEYS_INDEX_START_ASC", columnList = "id_k1, id_k2, id_k3, id_start ASC"),
+        @Index(name = "KEYS_INDEX_START_DESC", columnList = "id_k1, id_k2, id_k3, id_start DESC")
+})
+public class Triple {
+    @EmbeddedId
+    private TripleKeyId id;
+    private String value;
+}
+```
+
+The `ImplicitNamingStrategyComponentPathImpl` will create columns that are prefixed with `id_k1` and so on. The default strategy
+will create columns with just the name of the primary key, so `k1` and so on. Use this strategy if your data model looks like this. 
+
 ## Resources
 - [Hibernate 5 Naming Strategy Configuration](https://www.baeldung.com/hibernate-naming-strategy)
 - [Hibernate Field Naming with Spring Boot](https://www.baeldung.com/hibernate-field-naming-spring-boot)
