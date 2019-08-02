@@ -46,7 +46,8 @@
 <!--        <module>20-simple-telegraf-influx-grafana</module>-->
 <!--        <module>21-simple-vavr-web-data</module>-->
 <!--        <module>22-simple-jpa-mysql</module>-->
-        <module>23-simple-conditional-beans</module>
+<!--        <module>23-simple-conditional-beans</module>-->
+        <module>24-simple-starter</module>
     </modules>
 
     <dependencyManagement>
