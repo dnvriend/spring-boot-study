@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import lombok.val;
 
+import static com.dnvriend.starter.GreeterConstants.*;
+
 @Configuration
 @ConditionalOnClass(Greeter.class)
 @EnableConfigurationProperties(GreeterProperties.class)
@@ -24,13 +26,13 @@ public class GreeterAutoConfiguration {
         val userName = Option.of(greeterProperties.getUserName())
                 .getOrElse(System.getProperty("user.name"));
         val morningMessage = Option.of(greeterProperties.getMorningMessage())
-                .getOrElse("Hello %s, it is morning");
+                .getOrElse(MORNING_MESSAGE);
         val afternoonMessage = Option.of(greeterProperties.getAfternoonMessage())
-                .getOrElse("Hello %s, it is afternoon");
+                .getOrElse(AFTERNOON_MESSAGE);
         val eveningMessage = Option.of(greeterProperties.getEveningMessage())
-                .getOrElse("Hello %s, it is evening");
+                .getOrElse(EVENING_MESSAGE);
         val nightMessage = Option.of(greeterProperties.getNightMessage())
-                .getOrElse("Hello %s, it is night");
+                .getOrElse(NIGHT_MESSAGE);
 
         return GreetingConfig.builder()
                 .userName(userName)

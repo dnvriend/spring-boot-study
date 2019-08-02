@@ -25,3 +25,4 @@ Consider defining a bean of type 'com.dnvriend.starter.Greeter' in your configur
 - [Spring Boot Manual - Creating Your Own Auto-configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-developing-auto-configuration.html)
 - [Creating a Custom Starter with Spring Boot](https://www.baeldung.com/spring-boot-custom-starter)
 - [Custom starter github](https://github.com/eugenp/tutorials/tree/master/spring-boot-custom-starter)
+- [Configuration Metadata](https://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html)
