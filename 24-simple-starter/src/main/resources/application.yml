@@ -1,9 +1,9 @@
-#my.value: There!
-my.week: TUESDAY
-my.number: 24
-my.active: true
-my.names: foo,bar,baz
-
-# props
-my.props.name: Dennis
-my.props.age: 42
+com:
+  github:
+    dnvriend:
+      greeter:
+        userName: "Dennis"
+        morningMessage: "Morning %s!"
+        afternoonMessage: "Afternoon %s!"
+        eveningMessage: "Evening %s!"
+        nightMessage: "'Night %s!"
