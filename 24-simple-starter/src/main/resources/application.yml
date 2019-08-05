@@ -3,7 +3,8 @@ com:
     dnvriend:
       greeter:
         userName: "Dennis"
-        morningMessage: "Morning %s!"
-        afternoonMessage: "Afternoon %s!"
-        eveningMessage: "Evening %s!"
-        nightMessage: "'Night %s!"
+        messages:
+          morningMessage: "Morning %s!"
+          afternoonMessage: "Afternoon %s!"
+          eveningMessage: "Evening %s!"
+          nightMessage: "'Night %s!"

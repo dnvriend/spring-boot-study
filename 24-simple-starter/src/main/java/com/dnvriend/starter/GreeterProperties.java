@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import static com.dnvriend.starter.GreeterConstants.*;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,21 +16,21 @@ public class GreeterProperties {
      * The annotation processor (pom dependency) will use comments
      * as a description when processing this class
      */
-    private String userName = USER_NAME;
+    private String userName = "dnvriend";
     /**
      * A morning message
      */
-    private String morningMessage = MORNING_MESSAGE;
+    private String morningMessage = "Hello %s, it is morning";
     /**
      * An afternoon message
      */
-    private String afternoonMessage = AFTERNOON_MESSAGE;
+    private String afternoonMessage = "Hello %s, it is afternoon";
     /**
      * An evening message
      */
-    private String eveningMessage = EVENING_MESSAGE;
+    private String eveningMessage = "Hello %s, it is evening";
     /**
      * A night message
      */
-    private String nightMessage = NIGHT_MESSAGE;
+    private String nightMessage = "Hello %s, it is night";
 }

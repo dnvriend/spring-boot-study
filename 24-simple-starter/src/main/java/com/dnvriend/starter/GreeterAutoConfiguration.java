@@ -36,10 +36,14 @@ public class GreeterAutoConfiguration {
 
         return GreetingConfig.builder()
                 .userName(userName)
-                .morningMessage(morningMessage)
-                .afternoonMessage(afternoonMessage)
-                .eveningMessage(eveningMessage)
-                .nightMessage(nightMessage)
+                .messages(
+                        GreetingConfig.Messages.builder()
+                                .morningMessage(morningMessage)
+                                .afternoonMessage(afternoonMessage)
+                                .eveningMessage(eveningMessage)
+                                .nightMessage(nightMessage)
+                                .build()
+                )
                 .build();
     }
 

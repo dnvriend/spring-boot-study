@@ -11,8 +11,17 @@ import lombok.NoArgsConstructor;
 @Builder(toBuilder = true)
 public class GreetingConfig {
     private String userName;
-    private String morningMessage;
-    private String afternoonMessage;
-    private String eveningMessage;
-    private String nightMessage;
+
+    private Messages messages;
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder(toBuilder = true)
+    public static class Messages {
+        private String morningMessage;
+        private String afternoonMessage;
+        private String eveningMessage;
+        private String nightMessage;
+    }
 }
