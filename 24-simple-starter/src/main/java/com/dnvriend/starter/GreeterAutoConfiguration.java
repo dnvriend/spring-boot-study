@@ -1,12 +1,12 @@
 package com.dnvriend.starter;
 
 import io.vavr.control.Option;
+import lombok.val;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import lombok.val;
 
 import static com.dnvriend.starter.GreeterConstants.*;
 
@@ -18,6 +18,7 @@ public class GreeterAutoConfiguration {
 
     public GreeterAutoConfiguration(GreeterProperties greeterProperties) {
         this.greeterProperties = greeterProperties;
+        System.out.println(greeterProperties);
     }
 
     @Bean
@@ -25,25 +26,21 @@ public class GreeterAutoConfiguration {
     public GreetingConfig greeterConfig() {
         val userName = Option.of(greeterProperties.getUserName())
                 .getOrElse(System.getProperty("user.name"));
-        val morningMessage = Option.of(greeterProperties.getMorningMessage())
+        val morningMessage = Option.of(greeterProperties.getMessages().getMorningMessage())
                 .getOrElse(MORNING_MESSAGE);
-        val afternoonMessage = Option.of(greeterProperties.getAfternoonMessage())
+        val afternoonMessage = Option.of(greeterProperties.getMessages().getAfternoonMessage())
                 .getOrElse(AFTERNOON_MESSAGE);
-        val eveningMessage = Option.of(greeterProperties.getEveningMessage())
+        val eveningMessage = Option.of(greeterProperties.getMessages().getEveningMessage())
                 .getOrElse(EVENING_MESSAGE);
-        val nightMessage = Option.of(greeterProperties.getNightMessage())
+        val nightMessage = Option.of(greeterProperties.getMessages().getNightMessage())
                 .getOrElse(NIGHT_MESSAGE);
 
         return GreetingConfig.builder()
                 .userName(userName)
-                .messages(
-                        GreetingConfig.Messages.builder()
-                                .morningMessage(morningMessage)
-                                .afternoonMessage(afternoonMessage)
-                                .eveningMessage(eveningMessage)
-                                .nightMessage(nightMessage)
-                                .build()
-                )
+                .morningMessage(morningMessage)
+                .afternoonMessage(afternoonMessage)
+                .eveningMessage(eveningMessage)
+                .nightMessage(nightMessage)
                 .build();
     }
 

@@ -3,6 +3,9 @@ com:
     dnvriend:
       greeter:
         userName: "Dennis"
+        nickNames[0]: one
+        nickNames[1]: two
+        nickNames[2]: three
         messages:
           morningMessage: "Morning %s!"
           afternoonMessage: "Afternoon %s!"

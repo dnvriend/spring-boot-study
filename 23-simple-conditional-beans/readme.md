@@ -5,8 +5,7 @@ add some if-else logic in your `@Bean` method to provide the correct bean, depen
 Spring supports the following conditional annotations:
 
 - [Class Conditions](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-developing-auto-configuration.html#boot-features-class-conditions): let `@Configuration` classes be included based on the presence or absence of specific classes. The following annotations are available:
-  - ConditionalOnClass:  
-  - ConditionalOnMissingClass:
+  - ConditionalOn(Missing)Class:
 - [Bean Conditions](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-developing-auto-configuration.html#boot-features-bean-conditions): let a `@Bean` be included on the presence or absence of specific beans. You can use the `value` attribute to specify beans by type or `name` to specify beans by name. The `search` attribute lets you limit the ApplicationContext hierarchy that should be considered when searching for beans. These annotations should be used on auto-configuration classes, because these are guaranteed to be loaded after any user-defined bean definitions have been added 
   - ConditionalOn(Missing)Bean: 
   - ConditionalOnJava:

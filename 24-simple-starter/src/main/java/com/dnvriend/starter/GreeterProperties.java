@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,20 +19,34 @@ public class GreeterProperties {
      * as a description when processing this class
      */
     private String userName = "dnvriend";
+
     /**
-     * A morning message
+     * A list of nicknames
      */
-    private String morningMessage = "Hello %s, it is morning";
-    /**
-     * An afternoon message
-     */
-    private String afternoonMessage = "Hello %s, it is afternoon";
-    /**
-     * An evening message
-     */
-    private String eveningMessage = "Hello %s, it is evening";
-    /**
-     * A night message
-     */
-    private String nightMessage = "Hello %s, it is night";
+    private List<String> nickNames;
+
+    private Messages messages;
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder(toBuilder = true)
+    public static class Messages {
+        /**
+         * A morning message
+         */
+        private String morningMessage = "Hello %s, it is morning";
+        /**
+         * An afternoon message
+         */
+        private String afternoonMessage = "Hello %s, it is afternoon";
+        /**
+         * An evening message
+         */
+        private String eveningMessage = "Hello %s, it is evening";
+        /**
+         * A night message
+         */
+        private String nightMessage = "Hello %s, it is night";
+    }
 }

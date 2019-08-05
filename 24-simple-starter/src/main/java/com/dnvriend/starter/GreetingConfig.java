@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,16 +14,11 @@ import lombok.NoArgsConstructor;
 public class GreetingConfig {
     private String userName;
 
-    private Messages messages;
+    private String morningMessage;
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder(toBuilder = true)
-    public static class Messages {
-        private String morningMessage;
-        private String afternoonMessage;
-        private String eveningMessage;
-        private String nightMessage;
-    }
+    private String afternoonMessage;
+
+    private String eveningMessage;
+
+    private String nightMessage;
 }
