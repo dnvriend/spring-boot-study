@@ -20,7 +20,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.6.RELEASE</version>
+        <version>2.1.7.RELEASE</version>
     </parent>
 
     <modules>
@@ -47,7 +47,9 @@
 <!--        <module>21-simple-vavr-web-data</module>-->
 <!--        <module>22-simple-jpa-mysql</module>-->
 <!--        <module>23-simple-conditional-beans</module>-->
-        <module>24-simple-starter</module>
+<!--        <module>24-simple-starter</module>-->
+<!--        <module>25-simple-scala</module>-->
+        <module>26-simple-spring-shell</module>
     </modules>
 
     <dependencyManagement>
