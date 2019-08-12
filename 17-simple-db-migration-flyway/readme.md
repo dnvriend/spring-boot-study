@@ -19,8 +19,28 @@ and has version 1. When migration scripts must be applied for a populated databa
 than 1 must be present. Migration scripts with version number 1 will be skipped. It is therefor mandatory that you start your migration
 scripts version numbers with version 2 or higher for an existing schema.
 
+## HealthIndicator
+Spring boot comes with a DataSourceHealthIndicatorAutoConfiguration that provides a DataSourceHealthIndicator. The configuration is enabled when it finds 'management.health.defaults.enabled=true', which is enabled by default. When a 'javax.sql.DataSource' is present then a default DataSourceHealthIndicator will be provided.
+
+
+You can add your own HealthIndicator by providing the following bean. Note that,
+if you just want to check whether or not the datasource can make a connection,
+  Spring boot provides the DataSourceHealthIndicator. Use the following only for
+  custom queries.
+
+
+```
+@Bean
+public HealthIndicator dbHealthIndicator() {
+    DataSourceHealthIndicator indicator = new DataSourceHealthIndicator(dataSource());
+    indicator.setQuery("Your Query Here");
+    return indicator;
+}
+```
+
 ## Resources
 - [Flyway - Github](https://github.com/flyway/)
 - [FLyway - Documentation](https://flywaydb.org/)
 - [Execute Flyway Database Migrations on Startup](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html)
 - [FlywayProperties](https://github.com/spring-projects/spring-boot/blob/v2.1.6.RELEASE/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/flyway/FlywayProperties.java)
+- [
