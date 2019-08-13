@@ -7,6 +7,18 @@ To enable a profile, launch the VM with the
 -Dspring.profiles.active=h2-default
 ```
 
+## MySQL storage engine
+MySQL supports [MyISAM](http://dev.mysql.com/doc/refman/5.1/en/myisam-storage-engine.html) and [InnoDB](http://dev.mysql.com/doc/refman/5.1/en/innodb-storage-engine.html) storage engines. If you need transactions and
+row-level locking, you use InnoDB.
+
+Using `MySQLInnoDBDialect`, Hibernate appends `type=InnoDB` to the table creation statement. This explicitly creates an InnoDB table. `MySQLDialect` does not append an engine string, thus, would create a MyISAM table.
+
+However, you can also change the default storage engine of the MySQL server by using the following line in your `my.cnf`, MySQL configuration, file.
+
+```
+default-storage-engine=innodb
+```
+
 ## Hibernate Naming Strategy
 Hibernate uses [two different naming strategies](https://docs.jboss.org/hibernate/orm/5.3/userguide/html_single/Hibernate_User_Guide.html#naming) to map names from the object model to the corresponding database model:
  
