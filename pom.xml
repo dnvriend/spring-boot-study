@@ -50,7 +50,8 @@
 <!--        <module>24-simple-starter</module>-->
 <!--        <module>25-simple-scala</module>-->
         <!-- <module>26-simple-spring-shell</module> -->
-        <module>27-simple-reactive-spring</module>
+<!--        <module>27-simple-reactive-spring</module>-->
+        <module>28-simple-spring-interceptor</module>
     </modules>
 
     <dependencyManagement>
