@@ -17,12 +17,6 @@
         <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
     </properties>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.7.RELEASE</version>
-    </parent>
-
     <modules>
 <!--        <module>01-simple</module>-->
 <!--        <module>02-simple-web</module>-->
@@ -49,13 +43,21 @@
 <!--        <module>23-simple-conditional-beans</module>-->
 <!--        <module>24-simple-starter</module>-->
 <!--        <module>25-simple-scala</module>-->
-        <!-- <module>26-simple-spring-shell</module> -->
+<!--         <module>26-simple-spring-shell</module> -->
 <!--        <module>27-simple-reactive-spring</module>-->
-        <module>28-simple-spring-interceptor</module>
+<!--        <module>28-simple-spring-interceptor</module>-->
+        <module>29-simple-spring-bom</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.1.7.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
