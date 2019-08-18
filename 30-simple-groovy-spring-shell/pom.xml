@@ -27,14 +27,6 @@
             <artifactId>spring-shell-starter</artifactId>
             <version>2.0.1.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.vavr</groupId>
-            <artifactId>vavr</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
@@ -63,14 +55,14 @@
                         <phase>compile</phase>
                         <configuration>
                             <tasks>
-                                <mkdir dir="${basedir}/src/main/groovy"/>
+                                <mkdir dir="${basedir}/src/main/java"/>
                                 <taskdef name="groovyc"
                                     classname="org.codehaus.groovy.ant.Groovyc">
                                     <classpath refid="maven.compile.classpath"/>
                                 </taskdef>
                                 <mkdir dir="${project.build.outputDirectory}"/>
                                 <groovyc destdir="${project.build.outputDirectory}"
-                                    srcdir="${basedir}/src/main/groovy/" listfiles="true">
+                                    srcdir="${basedir}/src/main/java/" listfiles="true">
                                     <classpath refid="maven.compile.classpath"/>
                                 </groovyc>
                             </tasks>
@@ -84,14 +76,14 @@
                         <phase>test-compile</phase>
                         <configuration>
                             <tasks>
-                                <mkdir dir="${basedir}/src/test/groovy"/>
+                                <mkdir dir="${basedir}/src/test/java"/>
                                 <taskdef name="groovyc"
                                     classname="org.codehaus.groovy.ant.Groovyc">
                                     <classpath refid="maven.test.classpath"/>
                                 </taskdef>
                                 <mkdir dir="${project.build.testOutputDirectory}"/>
                                 <groovyc destdir="${project.build.testOutputDirectory}"
-                                    srcdir="${basedir}/src/test/groovy/" listfiles="true">
+                                    srcdir="${basedir}/src/test/java/" listfiles="true">
                                     <classpath refid="maven.test.classpath"/>
                                 </groovyc>
                             </tasks>

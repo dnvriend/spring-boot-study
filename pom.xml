@@ -43,10 +43,11 @@
 <!--        <module>23-simple-conditional-beans</module>-->
 <!--        <module>24-simple-starter</module>-->
 <!--        <module>25-simple-scala</module>-->
-        <module>26-simple-spring-shell</module>
+<!--        <module>26-simple-spring-shell</module>-->
 <!--        <module>27-simple-reactive-spring</module>-->
 <!--        <module>28-simple-spring-interceptor</module>-->
         <!-- <module>29-simple-spring-bom</module> -->
+         <module>30-simple-groovy-spring-shell</module>
     </modules>
 
     <dependencyManagement>

@@ -1,6 +1,6 @@
 package com.github.dnvriend.command.translation
 
-import lombok.extern.slf4j.Slf4j
+import groovy.util.logging.Slf4j
 import org.springframework.stereotype.Service
 
 @Slf4j

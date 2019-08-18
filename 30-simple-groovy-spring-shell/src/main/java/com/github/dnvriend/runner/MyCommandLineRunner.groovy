@@ -1,6 +1,6 @@
 package com.github.dnvriend.runner
 
-import lombok.extern.slf4j.Slf4j
+import groovy.util.logging.Slf4j
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 

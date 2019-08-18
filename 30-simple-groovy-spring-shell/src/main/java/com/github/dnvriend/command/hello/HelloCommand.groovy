@@ -1,6 +1,6 @@
 package com.github.dnvriend.command.hello
 
-import lombok.extern.slf4j.Slf4j
+import groovy.util.logging.Slf4j
 import org.springframework.shell.standard.ShellComponent
 import org.springframework.shell.standard.ShellMethod
 
