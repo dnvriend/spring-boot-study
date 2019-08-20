@@ -7,13 +7,17 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockingDetails;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
+import com.github.dnvriend.domain.Car;
 import com.github.dnvriend.domain.User;
+import com.github.dnvriend.exeptions.EngineNotStartedException;
 import com.github.dnvriend.services.UserService;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +29,7 @@ import org.mockito.Captor;
 import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockingDetails;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.exceptions.verification.NoInteractionsWanted;
@@ -63,7 +68,7 @@ class ExampleTest {
     @Test
     void manuallyCreateMocks() {
         // mock creation
-        List mockList = Mockito.mock(ArrayList.class);
+        List mockList = mock(ArrayList.class);
 
         // using the mock object
         mockList.add("one");
@@ -127,7 +132,7 @@ class ExampleTest {
 
     @Test
     void manualCaptor() {
-        List mockList = Mockito.mock(List.class);
+        List mockList = mock(List.class);
         // Captures arguments for further assertions.
         ArgumentCaptor<String> arg = ArgumentCaptor.forClass(String.class);
 
@@ -221,5 +226,22 @@ class ExampleTest {
         assertThat(mockedList.get(0)).isEqualTo("one");
         assertThat(mockedList.get(0)).isEqualTo("two");
         assertThat(mockedList.get(0)).isEqualTo("three");
+    }
+
+    @Test
+    void voidMock(@Mock Car car) {
+        doThrow(EngineNotStartedException.class).when(car).shiftGear();
+        assertThrows(EngineNotStartedException.class, () -> car.shiftGear());
+    }
+
+    @Test
+    void mockingDetailsTest(@Mock User user) {
+        when(user.getName()).thenReturn("dnvriend");
+        when(user.getAge()).thenReturn(42);
+        assertThat(user.getName()).isEqualTo("dnvriend");
+        assertThat(user.getAge()).isEqualTo(42);
+        assertThat(mockingDetails(user).isMock()).isTrue();
+        MockingDetails details = mockingDetails(user);
+        System.out.println(details.printInvocations());
     }
 }
