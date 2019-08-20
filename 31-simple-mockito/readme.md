@@ -261,3 +261,4 @@ MockMvc is the main entry point for server-side Spring MVC test support. Using M
 - [Integration test for authentication filter with Spring Boot](https://stackoverflow.com/questions/40071707/integration-test-for-authentication-filter-with-spring-boot)
 - [Spring Boot Test Data Layer Example with @DataJPATest](https://hellokoding.com/spring-boot-test-data-layer-example-with-datajpatest/)
 - [Testing JPA Queries with @DataJpaTest](https://reflectoring.io/spring-boot-data-jpa-test/)
+- [Integration Testing of Spring MVC Applications: Write Clean Assertions with JsonPath](https://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-write-clean-assertions-with-jsonpath/)
