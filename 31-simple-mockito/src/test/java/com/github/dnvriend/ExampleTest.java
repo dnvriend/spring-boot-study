@@ -1,7 +1,9 @@
 package com.github.dnvriend;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.inOrder;
@@ -9,6 +11,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 
 import com.github.dnvriend.domain.User;
 import com.github.dnvriend.services.UserService;
@@ -35,12 +38,16 @@ class ExampleTest {
      */
     @Mock
     UserService userService;
+
     @Spy
     List<String> spiedList = new ArrayList<>();
+
     @Captor
     ArgumentCaptor argCaptor;
+
     @Mock
     Map<String, String> wordMap;
+
     @InjectMocks
     MyDictionary dict = new MyDictionary();
 
@@ -65,7 +72,7 @@ class ExampleTest {
         assertEquals(0, mockList.size());
 
         // using the mock object
-        Mockito.when(mockList.size()).thenReturn(100);
+        when(mockList.size()).thenReturn(100);
         assertEquals(100, mockList.size());
     }
 
@@ -78,7 +85,7 @@ class ExampleTest {
         assertEquals(0, mockedList.size());
 
         // using the mock object
-        Mockito.when(mockedList.size()).thenReturn(100);
+        when(mockedList.size()).thenReturn(100);
         assertEquals(100, mockedList.size());
     }
 
@@ -142,7 +149,7 @@ class ExampleTest {
     void injectMockTest() {
         // wordMap gets mocked
         // note that wordMap is also injected into MyDictionary
-        Mockito.when(wordMap.get("aWord")).thenReturn("aMeaning");
+        when(wordMap.get("aWord")).thenReturn("aMeaning");
         // assert that wordMap has been injected in MyDictionary
         assertEquals("aMeaning", dict.getMeaning("aWord"));
     }
@@ -206,5 +213,13 @@ class ExampleTest {
 
         //following verification will fail
         assertThrows(NoInteractionsWanted.class, () -> verifyNoMoreInteractions(mockedList));
+    }
+
+    @Test
+    void multipleReturn(@Mock List<String> mockedList) {
+        when(mockedList.get(anyInt())).thenReturn("one", "two", "three");
+        assertThat(mockedList.get(0)).isEqualTo("one");
+        assertThat(mockedList.get(0)).isEqualTo("two");
+        assertThat(mockedList.get(0)).isEqualTo("three");
     }
 }
