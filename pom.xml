@@ -47,7 +47,8 @@
 <!--        <module>27-simple-reactive-spring</module>-->
 <!--        <module>28-simple-spring-interceptor</module>-->
         <!-- <module>29-simple-spring-bom</module> -->
-         <module>30-simple-groovy-spring-shell</module>
+<!--         <module>30-simple-groovy-spring-shell</module>-->
+         <module>31-simple-mockito</module>
     </modules>
 
     <dependencyManagement>

@@ -1,0 +1,9 @@
+#my.value: There!
+my.week: TUESDAY
+my.number: 24
+my.active: true
+my.names: foo,bar,baz
+
+# props
+my.props.name: Dennis
+my.props.age: 42
