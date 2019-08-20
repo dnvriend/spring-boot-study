@@ -1,21 +1,24 @@
 package com.github.dnvriend.controllers;
 
 import com.github.dnvriend.meterbinder.PersonStatsProbe;
-import org.springframework.http.HttpStatus;
-import org.springframework.lang.NonNull;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.http.HttpStatus;
+import org.springframework.lang.NonNull;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 //@RestController
 //@RequestMapping("/person")
 public class PersonControllerProbe {
-    private Map<Integer, Person> people = new ConcurrentHashMap<>();
 
     private final PersonStatsProbe personStatsProbe;
+    private Map<Integer, Person> people = new ConcurrentHashMap<>();
 
     public PersonControllerProbe(PersonStatsProbe personStatsProbe) {
         this.personStatsProbe = personStatsProbe;
@@ -33,8 +36,9 @@ public class PersonControllerProbe {
     public Person getPerson(@PathVariable("userId") int userId) {
         personStatsProbe.incrementGetPersonByIdCounter();
         return Optional
-                .ofNullable(people.get(userId))
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("User with id %s", userId)));
+            .ofNullable(people.get(userId))
+            .orElseThrow(
+                () -> new ResourceNotFoundException(String.format("User with id %s", userId)));
     }
 
     @PutMapping()

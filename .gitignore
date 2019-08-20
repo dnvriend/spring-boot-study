@@ -7,3 +7,4 @@ spring-shell.log
 .project
 .settings
 .sts4-cache
+/src/

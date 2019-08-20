@@ -1,6 +1,15 @@
 package com.github.dnvriend;
 
 import com.github.dnvriend.converters.DateTimeAttributeConverter;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import javax.persistence.Convert;
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,18 +25,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.Convert;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import java.io.Serializable;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+interface TripleRepository extends JpaRepository<Triple, TripleKeyId> {
+
+    Stream<Triple> findById_K1AndId_K2AndId_K3(String k1, String k2, String k3);
+}
 
 @Data
 @AllArgsConstructor
@@ -35,6 +45,7 @@ import java.util.stream.Stream;
 @Builder
 @Embeddable
 class TripleKeyId implements Serializable {
+
     private String k1;
     private String k2;
     private String k3;
@@ -46,6 +57,7 @@ class TripleKeyId implements Serializable {
 @Builder
 @Entity(name = "triple")
 class Triple {
+
     @EmbeddedId
     private TripleKeyId id;
     private String value;
@@ -60,93 +72,92 @@ class Triple {
 @NoArgsConstructor
 @Builder
 class Value {
-    private String value;
-}
 
-interface TripleRepository extends JpaRepository<Triple, TripleKeyId> {
-    Stream<Triple> findById_K1AndId_K2AndId_K3(String k1, String k2, String k3);
+    private String value;
 }
 
 @Service
 class TripleService {
+
     @Autowired
     private TripleRepository tripleRepository;
 
     public Triple saveTriple(String k1, String k2, String k3, String value) {
         return tripleRepository.save(
-                Triple.builder()
-                        .id(TripleKeyId.builder()
-                                .k1(k1)
-                                .k2(k2)
-                                .k3(k3)
-                                .build())
-                        .value(value)
-                        .build());
+            Triple.builder()
+                .id(TripleKeyId.builder()
+                    .k1(k1)
+                    .k2(k2)
+                    .k3(k3)
+                    .build())
+                .value(value)
+                .build());
     }
 
-    public Triple saveTripleWithInterval(String k1, String k2, String k3, DateTime start, DateTime end, String value) {
+    public Triple saveTripleWithInterval(String k1, String k2, String k3, DateTime start,
+        DateTime end, String value) {
         return tripleRepository.save(
-                Triple.builder()
-                        .id(TripleKeyId.builder()
-                                .k1(k1)
-                                .k2(k2)
-                                .k3(k3)
-                                .build())
-                        .start(start)
-                        .end(end)
-                        .value(value)
-                        .build());
+            Triple.builder()
+                .id(TripleKeyId.builder()
+                    .k1(k1)
+                    .k2(k2)
+                    .k3(k3)
+                    .build())
+                .start(start)
+                .end(end)
+                .value(value)
+                .build());
     }
 
     public boolean exists(String k1, String k2, String k3) {
         return tripleRepository.exists(Example.of(
-                Triple.builder()
-                        .id(TripleKeyId.builder()
-                                .k1(k1)
-                                .k2(k2)
-                                .k3(k3)
-                                .build())
-                        .build())
+            Triple.builder()
+                .id(TripleKeyId.builder()
+                    .k1(k1)
+                    .k2(k2)
+                    .k3(k3)
+                    .build())
+                .build())
         );
     }
 
     public boolean exists(String k1, String k2, String k3, DateTime start, DateTime end) {
         return tripleRepository.exists(Example.of(
-                Triple.builder()
-                        .id(TripleKeyId.builder()
-                                .k1(k1)
-                                .k2(k2)
-                                .k3(k3)
-                                .build())
-                        .start(start)
-                        .end(end)
-                        .build())
+            Triple.builder()
+                .id(TripleKeyId.builder()
+                    .k1(k1)
+                    .k2(k2)
+                    .k3(k3)
+                    .build())
+                .start(start)
+                .end(end)
+                .build())
         );
     }
 
     public Optional<Triple> findOne(String k1, String k2, String k3) {
         return tripleRepository.findOne(Example.of(
-                Triple.builder()
-                        .id(TripleKeyId.builder()
-                                .k1(k1)
-                                .k2(k2)
-                                .k3(k3)
-                                .build())
-                        .build())
+            Triple.builder()
+                .id(TripleKeyId.builder()
+                    .k1(k1)
+                    .k2(k2)
+                    .k3(k3)
+                    .build())
+                .build())
         );
     }
 
     public Optional<Triple> findOne(String k1, String k2, String k3, DateTime start, DateTime end) {
         return tripleRepository.findOne(Example.of(
-                Triple.builder()
-                        .id(TripleKeyId.builder()
-                                .k1(k1)
-                                .k2(k2)
-                                .k3(k3)
-                                .build())
-                        .start(start)
-                        .end(end)
-                        .build())
+            Triple.builder()
+                .id(TripleKeyId.builder()
+                    .k1(k1)
+                    .k2(k2)
+                    .k3(k3)
+                    .build())
+                .start(start)
+                .end(end)
+                .build())
         );
     }
 
@@ -157,22 +168,23 @@ class TripleService {
 
 @RestController
 class TripleController {
+
     @Autowired
     private TripleService tripleService;
 
     static Value toJson(Triple triple) {
         return Value.builder()
-                .value(triple.getValue())
-                .build();
+            .value(triple.getValue())
+            .build();
     }
 
     @PutMapping("/{k1}/{k2}/{k3}")
     public void putTriple(
-            @PathVariable("k1") @NonNull String k1,
-            @PathVariable("k2") @NonNull String k2,
-            @PathVariable("k3") @NonNull String k3,
-            @RequestBody @NonNull Value value) {
-        if(tripleService.exists(k1, k2, k3)) {
+        @PathVariable("k1") @NonNull String k1,
+        @PathVariable("k2") @NonNull String k2,
+        @PathVariable("k3") @NonNull String k3,
+        @RequestBody @NonNull Value value) {
+        if (tripleService.exists(k1, k2, k3)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Resource already exists");
         }
         tripleService.saveTriple(k1, k2, k3, value.getValue());
@@ -180,13 +192,13 @@ class TripleController {
 
     @PutMapping("/{k1}/{k2}/{k3}/{start}/{end}")
     public void putTripleWithInterval(
-            @PathVariable("k1") @NonNull String k1,
-            @PathVariable("k2") @NonNull String k2,
-            @PathVariable("k3") @NonNull String k3,
-            @PathVariable("start") @NonNull DateTime start,
-            @PathVariable("end") @NonNull DateTime end,
-            @RequestBody @NonNull Value value) {
-        if(tripleService.exists(k1, k2, k3, start, end)) {
+        @PathVariable("k1") @NonNull String k1,
+        @PathVariable("k2") @NonNull String k2,
+        @PathVariable("k3") @NonNull String k3,
+        @PathVariable("start") @NonNull DateTime start,
+        @PathVariable("end") @NonNull DateTime end,
+        @RequestBody @NonNull Value value) {
+        if (tripleService.exists(k1, k2, k3, start, end)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Resource already exists");
         }
         tripleService.saveTripleWithInterval(k1, k2, k3, start, end, value.getValue());
@@ -194,59 +206,61 @@ class TripleController {
 
     @RequestMapping(path = "/{k1}/{k2}/{k3}", method = RequestMethod.HEAD)
     public void checkTriple(
-            @PathVariable("k1") @NonNull String k1,
-            @PathVariable("k2") @NonNull String k2,
-            @PathVariable("k3") @NonNull String k3) {
+        @PathVariable("k1") @NonNull String k1,
+        @PathVariable("k2") @NonNull String k2,
+        @PathVariable("k3") @NonNull String k3) {
         tripleService.findOne(k1, k2, k3)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        String.format("Triple not found: %s/%s/%s", k1, k2, k3)));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                String.format("Triple not found: %s/%s/%s", k1, k2, k3)));
     }
 
     @Transactional(readOnly = true)
     @RequestMapping(path = "/{k1}/{k2}/{k3}/{start}/{end}", method = RequestMethod.HEAD)
     public void checkTripleByInterval(
-            @PathVariable("k1") @NonNull String k1,
-            @PathVariable("k2") @NonNull String k2,
-            @PathVariable("k3") @NonNull String k3,
-            @PathVariable("start") @NonNull DateTime start,
-            @PathVariable("end") @NonNull DateTime end) {
+        @PathVariable("k1") @NonNull String k1,
+        @PathVariable("k2") @NonNull String k2,
+        @PathVariable("k3") @NonNull String k3,
+        @PathVariable("start") @NonNull DateTime start,
+        @PathVariable("end") @NonNull DateTime end) {
         tripleService.findOne(k1, k2, k3, start, end)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        String.format("Triple not found: %s/%s/%s/%s/%s", k1, k2, k3, start, end)));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                String.format("Triple not found: %s/%s/%s/%s/%s", k1, k2, k3, start, end)));
     }
 
     @Transactional(readOnly = true)
     @GetMapping("/{k1}/{k2}/{k3}")
     public Optional<Value> getTriple(
-            @PathVariable("k1") @NonNull String k1,
-            @PathVariable("k2") @NonNull String k2,
-            @PathVariable("k3") @NonNull String k3) {
+        @PathVariable("k1") @NonNull String k1,
+        @PathVariable("k2") @NonNull String k2,
+        @PathVariable("k3") @NonNull String k3) {
         return tripleService.findOne(k1, k2, k3)
-                .map(TripleController::toJson);
+            .map(TripleController::toJson);
     }
 
     @Transactional(readOnly = true)
     @GetMapping("/{k1}/{k2}/{k3}/{start}/{end}")
     public List<Value> getTriplesWithInterval(
-            @PathVariable("k1") @NonNull String k1,
-            @PathVariable("k2") @NonNull String k2,
-            @PathVariable("k3") @NonNull String k3,
-            @PathVariable("start") @NonNull DateTime start,
-            @PathVariable("end") @NonNull DateTime end) {
+        @PathVariable("k1") @NonNull String k1,
+        @PathVariable("k2") @NonNull String k2,
+        @PathVariable("k3") @NonNull String k3,
+        @PathVariable("start") @NonNull DateTime start,
+        @PathVariable("end") @NonNull DateTime end) {
 
         Interval interval = new Interval(start, end);
         return tripleService.findById(k1, k2, k3)
-                .filter(tripleWithInterval -> {
-                    Interval jpaInterval = new Interval(tripleWithInterval.getStart(), tripleWithInterval.getEnd());
-                    return jpaInterval.overlaps(interval);
-                })
-                .map(TripleController::toJson)
-                .collect(Collectors.toList());
+            .filter(tripleWithInterval -> {
+                Interval jpaInterval = new Interval(tripleWithInterval.getStart(),
+                    tripleWithInterval.getEnd());
+                return jpaInterval.overlaps(interval);
+            })
+            .map(TripleController::toJson)
+            .collect(Collectors.toList());
     }
 }
 
 @SpringBootApplication
 public class Application {
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

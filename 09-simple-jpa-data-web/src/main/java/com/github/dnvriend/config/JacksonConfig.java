@@ -11,7 +11,8 @@ import com.fasterxml.jackson.datatype.joda.deser.PeriodDeserializer;
 import com.fasterxml.jackson.datatype.joda.ser.DateTimeSerializer;
 import com.fasterxml.jackson.datatype.joda.ser.PeriodSerializer;
 import com.github.dnvriend.converters.StringToJodaDateTimeConverter;
-import org.joda.time.DateTime;
+import java.util.Collections;
+import java.util.List;
 import org.joda.time.Interval;
 import org.joda.time.Period;
 import org.springframework.context.annotation.Bean;
@@ -22,20 +23,21 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.Collections;
-import java.util.List;
-
 @Configuration
 public class JacksonConfig implements WebMvcConfigurer {
+
     SimpleModule configureSimpleModule(final SimpleModule simpleModule) {
         JsonDeserializer<?> periodDeserializer = new PeriodDeserializer(true);
         JsonDeserializer<?> intervalDeserializer = new IntervalDeserializer(); // should be UTC
-        JsonDeserializer<?> dateTimeDeserializer = new DateTimeDeserializer(org.joda.time.DateTime.class, FormatConfig.DEFAULT_LOCAL_DATETIME_PARSER);
+        JsonDeserializer<?> dateTimeDeserializer = new DateTimeDeserializer(
+            org.joda.time.DateTime.class, FormatConfig.DEFAULT_LOCAL_DATETIME_PARSER);
         simpleModule.addDeserializer(Period.class, (JsonDeserializer<Period>) periodDeserializer);
         simpleModule.addSerializer(Period.class, new PeriodSerializer());
-        simpleModule.addDeserializer(Interval.class, (JsonDeserializer<Interval>) intervalDeserializer);
+        simpleModule
+            .addDeserializer(Interval.class, (JsonDeserializer<Interval>) intervalDeserializer);
         simpleModule.addSerializer(org.joda.time.DateTime.class, new DateTimeSerializer());
-        simpleModule.addDeserializer(org.joda.time.DateTime.class, (JsonDeserializer<org.joda.time.DateTime>) dateTimeDeserializer);
+        simpleModule.addDeserializer(org.joda.time.DateTime.class,
+            (JsonDeserializer<org.joda.time.DateTime>) dateTimeDeserializer);
         return simpleModule;
     }
 
@@ -46,9 +48,11 @@ public class JacksonConfig implements WebMvcConfigurer {
     @Bean
     public ObjectMapper jsonObjectMapper() {
         return new ObjectMapper()
-                .findAndRegisterModules()
-                .configure(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-                .registerModule(buildJsonSerializers());
+            .findAndRegisterModules()
+            .configure(
+                com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,
+                false)
+            .registerModule(buildJsonSerializers());
     }
 
     @Override
@@ -59,7 +63,7 @@ public class JacksonConfig implements WebMvcConfigurer {
 
     HttpMessageConverter<?> createJsonMessageConverter() {
         final MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter(
-                this.jsonObjectMapper()
+            this.jsonObjectMapper()
         );
         converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
         return converter;

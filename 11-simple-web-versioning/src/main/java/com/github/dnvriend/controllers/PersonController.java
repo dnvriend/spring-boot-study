@@ -1,18 +1,21 @@
 package com.github.dnvriend.controllers;
 
-import com.github.dnvriend.controllers.v1.Person;
 import com.github.dnvriend.status.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PersonController {
+
     Map<Integer, com.github.dnvriend.controllers.v1.Person> v1People = new ConcurrentHashMap<>();
     Map<Integer, com.github.dnvriend.controllers.v2.Person> v2People = new ConcurrentHashMap<>();
 
@@ -20,17 +23,21 @@ public class PersonController {
     // URL Versioning
     //
     @GetMapping("/v1/person/{userId}")
-    public com.github.dnvriend.controllers.v1.Person getV1Person(@PathVariable("userId") int userId) {
+    public com.github.dnvriend.controllers.v1.Person getV1Person(
+        @PathVariable("userId") int userId) {
         return Optional
-                .ofNullable(v1People.get(userId))
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("User with id %s", userId)));
+            .ofNullable(v1People.get(userId))
+            .orElseThrow(
+                () -> new ResourceNotFoundException(String.format("User with id %s", userId)));
     }
 
     @GetMapping("/v2/person/{userId}")
-    public com.github.dnvriend.controllers.v2.Person getV2Person(@PathVariable("userId") int userId) {
+    public com.github.dnvriend.controllers.v2.Person getV2Person(
+        @PathVariable("userId") int userId) {
         return Optional
-                .ofNullable(v2People.get(userId))
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("User with id %s", userId)));
+            .ofNullable(v2People.get(userId))
+            .orElseThrow(
+                () -> new ResourceNotFoundException(String.format("User with id %s", userId)));
     }
 
     @GetMapping("/v1/person")
@@ -59,12 +66,14 @@ public class PersonController {
 
     // Parameter versioning
     @GetMapping(value = "/person/{userId}", params = {"version=1"})
-    public com.github.dnvriend.controllers.v1.Person getPersonParamV1(@PathVariable("userId") int userId) {
+    public com.github.dnvriend.controllers.v1.Person getPersonParamV1(
+        @PathVariable("userId") int userId) {
         return getV1Person(userId);
     }
 
     @GetMapping(value = "/person/{userId}", params = {"version=2"})
-    public com.github.dnvriend.controllers.v2.Person getPersonParamV2(@PathVariable("userId") int userId) {
+    public com.github.dnvriend.controllers.v2.Person getPersonParamV2(
+        @PathVariable("userId") int userId) {
         return getV2Person(userId);
     }
 
@@ -80,12 +89,14 @@ public class PersonController {
 
     // Custom header
     @GetMapping(value = "/person/{userId}", headers = {"X-API-VERSION=1"})
-    public com.github.dnvriend.controllers.v1.Person getPersonHeaderV1(@PathVariable("userId") int userId) {
+    public com.github.dnvriend.controllers.v1.Person getPersonHeaderV1(
+        @PathVariable("userId") int userId) {
         return getV1Person(userId);
     }
 
     @GetMapping(value = "/person/{userId}", headers = {"X-API-VERSION=2"})
-    public com.github.dnvriend.controllers.v2.Person getPersonHeaderV2(@PathVariable("userId") int userId) {
+    public com.github.dnvriend.controllers.v2.Person getPersonHeaderV2(
+        @PathVariable("userId") int userId) {
         return getV2Person(userId);
     }
 
@@ -101,7 +112,8 @@ public class PersonController {
 
     // Content Negotiation
     @GetMapping(value = "/person/{userId}", produces = {"application/vnd.company.app-v1+json"})
-    public com.github.dnvriend.controllers.v1.Person getPersonContentTypeV1(@PathVariable("userId") int userId) {
+    public com.github.dnvriend.controllers.v1.Person getPersonContentTypeV1(
+        @PathVariable("userId") int userId) {
         return getV1Person(userId);
     }
 

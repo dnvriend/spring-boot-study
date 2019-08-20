@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class JacksonModuleConfig {
+
     @Bean
     public Module vavrModule() {
         return new VavrModule();

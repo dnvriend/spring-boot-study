@@ -7,18 +7,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
+
     private final Greeter greeter;
 
     public Application(Greeter greeter) {
         this.greeter = greeter;
     }
 
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println(greeter.greet());
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
     }
 }

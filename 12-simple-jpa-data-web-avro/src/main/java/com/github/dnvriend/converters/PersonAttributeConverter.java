@@ -1,22 +1,26 @@
 package com.github.dnvriend.converters;
 
 import com.github.dnvriend.avro.Person;
-import org.apache.avro.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
+import org.apache.avro.io.DatumReader;
+import org.apache.avro.io.DatumWriter;
+import org.apache.avro.io.Decoder;
+import org.apache.avro.io.DecoderFactory;
+import org.apache.avro.io.Encoder;
+import org.apache.avro.io.EncoderFactory;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-
 /**
  * There are two data serialization formats which Avro supports: JSON format and Binary format.
- *
+ * <p>
  * First, we’ll focus on the JSON format and then we’ll discuss the Binary format.
- *
+ * <p>
  * Classes for serialization:
  * <ul>
  *     <li>DatumWriter (Interface): Write data of a Schema.</li>
@@ -44,6 +48,7 @@ import java.io.IOException;
  */
 @Converter
 public class PersonAttributeConverter implements AttributeConverter<Person, byte[]> {
+
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override

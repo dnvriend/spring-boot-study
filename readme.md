@@ -22,3 +22,4 @@ $ http :8080/k1/k2/k3/2019-01-01T09:00:00.000Z/2019-01-01T13:00:00.000Z
 - [JUnit5](https://www.baeldung.com/junit-5)
 - [Assertj](https://joel-costigliola.github.io/assertj/)
 - [Jackson Improvements in Spring](https://spring.io/blog/2014/12/02/latest-jackson-integration-improvements-in-spring)
+- [Google Style Guide](https://github.com/google/styleguide)

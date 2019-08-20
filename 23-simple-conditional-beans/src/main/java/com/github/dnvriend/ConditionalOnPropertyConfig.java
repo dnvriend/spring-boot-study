@@ -5,11 +5,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Conditional on property checks if the specified property has the specific value.
- * It checks by default if the property is in the Environment and not equals to false.
+ * Conditional on property checks if the specified property has the specific value. It checks by
+ * default if the property is in the Environment and not equals to false.
  */
 @Configuration
 public class ConditionalOnPropertyConfig {
+
     @Bean
     @ConditionalOnProperty(name = "test.property", havingValue = "A")
     public A beanA() {

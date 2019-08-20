@@ -1,20 +1,31 @@
 package com.github.dnvriend;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.verifyZeroInteractions;
+
 import com.github.dnvriend.domain.User;
 import com.github.dnvriend.services.UserService;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
-import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.never;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.InOrder;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.mockito.exceptions.verification.NoInteractionsWanted;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class ExampleTest {
@@ -24,6 +35,14 @@ class ExampleTest {
      */
     @Mock
     UserService userService;
+    @Spy
+    List<String> spiedList = new ArrayList<>();
+    @Captor
+    ArgumentCaptor argCaptor;
+    @Mock
+    Map<String, String> wordMap;
+    @InjectMocks
+    MyDictionary dict = new MyDictionary();
 
     /**
      * We can also inject mock objects into method parameters
@@ -36,29 +55,36 @@ class ExampleTest {
 
     @Test
     void manuallyCreateMocks() {
-        // we can manually create mocks
+        // mock creation
         List mockList = Mockito.mock(ArrayList.class);
 
+        // using the mock object
         mockList.add("one");
+        // verification
         Mockito.verify(mockList).add("one");
         assertEquals(0, mockList.size());
 
+        // using the mock object
         Mockito.when(mockList.size()).thenReturn(100);
         assertEquals(100, mockList.size());
     }
 
     @Test
     void injectedMock(@Mock List<String> mockedList) {
+        // using the mock object
         mockedList.add("one");
+        //verification
         Mockito.verify(mockedList).add("one");
         assertEquals(0, mockedList.size());
 
+        // using the mock object
         Mockito.when(mockedList.size()).thenReturn(100);
         assertEquals(100, mockedList.size());
     }
 
     @Test
     void manuallySpy() {
+        // spy creation
         List<String> spyList = Mockito.spy(new ArrayList<String>());
         // use real methods to add elements
         spyList.add("one");
@@ -75,7 +101,6 @@ class ExampleTest {
         assertEquals(100, spyList.size());
     }
 
-    @Spy List<String> spiedList = new ArrayList<>();
     // @Spy does not work on parameters
     @Test
     void injectedSpy() {
@@ -105,8 +130,6 @@ class ExampleTest {
         assertEquals("one", arg.getValue());
     }
 
-    @Captor
-    ArgumentCaptor argCaptor;
     @Test
     void injectCapture(@Mock List mockedList) {
         mockedList.add("one");
@@ -115,12 +138,6 @@ class ExampleTest {
         assertEquals("one", argCaptor.getValue());
     }
 
-    @Mock
-    Map<String, String> wordMap;
-
-    @InjectMocks
-    MyDictionary dict = new MyDictionary();
-
     @Test
     void injectMockTest() {
         // wordMap gets mocked
@@ -128,5 +145,66 @@ class ExampleTest {
         Mockito.when(wordMap.get("aWord")).thenReturn("aMeaning");
         // assert that wordMap has been injected in MyDictionary
         assertEquals("aMeaning", dict.getMeaning("aWord"));
+    }
+
+    @Test
+    void testMockWithException(@Mock List<String> mockList) {
+        // create mock
+        doThrow(new RuntimeException()).when(mockList).clear();
+        assertThrows(RuntimeException.class, mockList::clear);
+    }
+
+    @Test
+    void testMockOrderFirst(@Mock List<String> singleMock) {
+        // using a single mock
+        singleMock.add("was added first");
+        singleMock.add("was added second");
+
+        // create an inOrder verifier for a single mock
+        InOrder inOrder = inOrder(singleMock);
+
+        // following will make sure that add is first called with "was added first", then with "was added second"
+        inOrder.verify(singleMock).add("was added first");
+        inOrder.verify(singleMock).add("was added second");
+    }
+
+    @Test
+    void testMockOrderSecond(@Mock List firstMock, @Mock List secondMock) {
+        // using mocks
+        firstMock.add("was called first");
+        secondMock.add("was called second");
+
+        // create inOrder object passing any mocks that need to be verified in order
+        InOrder inOrder = inOrder(firstMock, secondMock);
+
+        // following will make sure that firstMock was called before secondMock
+        inOrder.verify(firstMock).add("was called first");
+        inOrder.verify(secondMock).add("was called second");
+    }
+
+    @Test
+    void interactionNeverHappened(@Mock List mockOne, @Mock List mockTwo, @Mock List mockThree) {
+        // using mocks - only mockOne is interacted
+        mockOne.add("one");
+        // ordinary verification
+        verify(mockOne).add("one");
+
+        // verify that method was never called on a mock
+        verify(mockOne, never()).add("two");
+
+        // verify that other mocks were not interacted
+        verifyZeroInteractions(mockTwo, mockThree);
+    }
+
+    @Test
+    void redundantInvocations(@Mock List mockedList) {
+        // using mocks
+        mockedList.add("one");
+        mockedList.add("two");
+
+        verify(mockedList).add("one");
+
+        //following verification will fail
+        assertThrows(NoInteractionsWanted.class, () -> verifyNoMoreInteractions(mockedList));
     }
 }

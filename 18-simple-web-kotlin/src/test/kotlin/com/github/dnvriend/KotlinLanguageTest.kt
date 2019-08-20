@@ -1,13 +1,11 @@
 package com.github.dnvriend
 
-import org.junit.jupiter.api.Test
+import arrow.core.None
+import arrow.core.Option
 import com.github.dnvriend.services.CalculatorService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
-import arrow.*
-import arrow.core.*
-import arrow.data.*
-import arrow.core.extensions.option.applicative.*
+import org.junit.jupiter.api.Test
 
 class KotlinLanguageTest {
 
@@ -48,7 +46,7 @@ class KotlinLanguageTest {
     @Test
     fun `handle optional value fp way`() {
         val opt: Option<Int> = Option(1)
-        val actual: Option<Int> = opt.map { it + 1} .filter { it > 10 }
+        val actual: Option<Int> = opt.map { it + 1 }.filter { it > 10 }
         assertThat(actual).isEqualTo(None)
     }
 
@@ -65,7 +63,7 @@ class KotlinLanguageTest {
     fun `flatMap lists`() {
         val xs: List<Int> = listOf(1, 2, 3)
         val ys: List<Int> = listOf(4, 5, 6)
-        val zs: List<Int> = xs.flatMap { x -> ys.map { it + x }}
+        val zs: List<Int> = xs.flatMap { x -> ys.map { it + x } }
         assertThat(zs).isEqualTo(listOf(5, 6, 7, 6, 7, 8, 7, 8, 9))
     }
 }

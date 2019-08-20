@@ -7,6 +7,7 @@ import org.springframework.shell.standard.ShellMethod;
 @Slf4j
 @ShellComponent
 public class HelloCommand {
+
     @ShellMethod("Say Hello")
     public String sayHello() {
         log.debug("Saying Hello");

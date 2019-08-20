@@ -8,5 +8,6 @@ import lombok.Data;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 public class Base64Data {
+
     String base64;
 }

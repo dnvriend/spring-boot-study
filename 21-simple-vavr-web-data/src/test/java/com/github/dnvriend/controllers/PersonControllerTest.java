@@ -1,5 +1,7 @@
 package com.github.dnvriend.controllers;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.github.dnvriend.repositories.PersonEntity;
 import com.github.dnvriend.repositories.PersonEntityAssert;
 import com.github.dnvriend.repositories.PersonRepository;
@@ -10,8 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.transaction.annotation.Transactional;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @Transactional
@@ -36,10 +36,10 @@ class PersonControllerTest {
         val actual = personRepository.findPersonById(saved.getId()).get();
 
         PersonEntityAssert.assertThat(actual)
-                .hasNoNullFieldsOrProperties()
-                .hasId(1L)
-                .hasName("dnvriend")
-                .hasAge(42);
+            .hasNoNullFieldsOrProperties()
+            .hasId(1L)
+            .hasName("dnvriend")
+            .hasAge(42);
     }
 
     @Test
@@ -63,10 +63,10 @@ class PersonControllerTest {
 
         // then:
         assertThat(actual).isEqualTo(List.of(
-                PersonEntity.builder().id(1L).name("dnvriend").age(42).build(),
-                PersonEntity.builder().id(2L).name("dnvriend").age(43).build(),
-                PersonEntity.builder().id(3L).name("dnvriend").age(44).build(),
-                PersonEntity.builder().id(4L).name("dnvriend").age(45).build()
+            PersonEntity.builder().id(1L).name("dnvriend").age(42).build(),
+            PersonEntity.builder().id(2L).name("dnvriend").age(43).build(),
+            PersonEntity.builder().id(3L).name("dnvriend").age(44).build(),
+            PersonEntity.builder().id(4L).name("dnvriend").age(45).build()
         ));
     }
 }

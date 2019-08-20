@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+
     private final NameService nameService;
 
     public UserService(NameService nameService) {

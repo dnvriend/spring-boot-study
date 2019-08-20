@@ -20,7 +20,9 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Integer answer_to_life_the_universe_and_everything = conversionService.convert("42", Integer.class);
-        System.out.println("The answer to life the universe and everything is: " + answer_to_life_the_universe_and_everything);
+        Integer answer_to_life_the_universe_and_everything = conversionService
+            .convert("42", Integer.class);
+        System.out.println("The answer to life the universe and everything is: "
+            + answer_to_life_the_universe_and_everything);
     }
 }

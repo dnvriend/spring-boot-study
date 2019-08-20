@@ -1,8 +1,8 @@
 package com.github.dnvriend
 
 import com.typesafe.scalalogging.LazyLogging
-import org.springframework.boot.{CommandLineRunner, SpringApplication}
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.{CommandLineRunner, SpringApplication}
 import org.springframework.stereotype.Component
 
 @SpringBootApplication
@@ -10,7 +10,7 @@ class Application
 
 object Application {
   def main(args: Array[String]): Unit = {
-      SpringApplication.run(classOf[Application], args:_*)
+    SpringApplication.run(classOf[Application], args: _*)
   }
 }
 

@@ -10,16 +10,17 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class ConditionalOnNotWebApplicationConfig {
+
     @Bean
     @ConditionalOnWebApplication
-    public A beanA(){
+    public A beanA() {
         return new A(); // will initiate if the context is
         // WebApplicationContext.
     }
 
     @Bean
     @ConditionalOnNotWebApplication
-    public B beanB(){
+    public B beanB() {
         return new B(); // will initiate if the context is not
         // WebApplicationContext.
     }

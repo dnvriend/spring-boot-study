@@ -1,15 +1,14 @@
 package com.github.dnvriend.converters;
 
-import lombok.val;
-import org.joda.time.DateTime;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import lombok.val;
+import org.joda.time.DateTime;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Note: LocalDate and LocalDateTime do not contain information about timezone nor time offset.

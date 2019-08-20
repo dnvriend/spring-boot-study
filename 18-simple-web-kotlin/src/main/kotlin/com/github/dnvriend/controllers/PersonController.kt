@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/person")
-class PersonController(val personRepository: PersonRepository)
-{
+class PersonController(val personRepository: PersonRepository) {
     @GetMapping("/{id}")
     fun getPerson(@PathVariable("id") id: Long): Person? {
         return personRepository.findByIdOrNull(id)
@@ -32,7 +31,7 @@ class PersonController(val personRepository: PersonRepository)
 // top level functions, ie 'static'
 
 fun createPerson(id: Int): Person {
-    return Person(id,"dnvriend", 42)
+    return Person(id, "dnvriend", 42)
 }
 
 /**
@@ -41,9 +40,9 @@ fun createPerson(id: Int): Person {
  */
 fun createListOfPersons(): List<Person> {
     return listOf(
-            Person(1,"dnvriend", 42),
-            Person(2,"dnvriend", 43),
-            Person(3,"dnvriend", 44),
-            Person(4,"dnvriend", 45)
+            Person(1, "dnvriend", 42),
+            Person(2, "dnvriend", 43),
+            Person(3, "dnvriend", 44),
+            Person(4, "dnvriend", 45)
     )
 }

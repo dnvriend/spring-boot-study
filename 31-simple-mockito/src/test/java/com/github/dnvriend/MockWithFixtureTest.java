@@ -1,13 +1,12 @@
 package com.github.dnvriend;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class MockWithFixtureTest {
 

@@ -1,13 +1,13 @@
 package com.github.dnvriend;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.lang.NonNull;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class EvaluationTest {
 
@@ -35,7 +35,8 @@ class EvaluationTest {
 
     @Test
     void given_Spel_bean_method_invocation_when_Evaluated_then_result_is_bytes() {
-        assertThat(evaluateAs(Object.class, "'Hello World'.bytes")).isEqualTo("Hello World".getBytes());
+        assertThat(evaluateAs(Object.class, "'Hello World'.bytes"))
+            .isEqualTo("Hello World".getBytes());
     }
 
     @Test
@@ -45,6 +46,7 @@ class EvaluationTest {
 
     @Test
     void given_Spel_with_constructor_when_Evaludated_then_result_is_uppercased() {
-        assertThat(evaluateAs(String.class, "new String('hello world').toUpperCase()")).isEqualTo("HELLO WORLD");
+        assertThat(evaluateAs(String.class, "new String('hello world').toUpperCase()"))
+            .isEqualTo("HELLO WORLD");
     }
 }

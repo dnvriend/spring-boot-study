@@ -3,6 +3,7 @@ package com.dnvriend.starter;
 import java.time.LocalDateTime;
 
 public class Greeter {
+
     private final GreetingConfig greetingConfig;
 
     public Greeter(GreetingConfig greetingConfig) {
@@ -14,7 +15,8 @@ public class Greeter {
         if (hourOfDay >= 5 && hourOfDay < 12) {
             return String.format(greetingConfig.getMorningMessage(), greetingConfig.getUserName());
         } else if (hourOfDay >= 12 && hourOfDay < 17) {
-            return String.format(greetingConfig.getAfternoonMessage(), greetingConfig.getUserName());
+            return String
+                .format(greetingConfig.getAfternoonMessage(), greetingConfig.getUserName());
         } else if (hourOfDay >= 17 && hourOfDay < 20) {
             return String.format(greetingConfig.getEveningMessage(), greetingConfig.getUserName());
         } else {

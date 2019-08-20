@@ -228,10 +228,9 @@ The spring-boot-test-autoconfigure module includes a number of annotations that 
 
 A list of slices can be found [here](https://docs.spring.io/spring-boot/docs/current/reference/html/test-auto-configuration.html).
 
-- DataJdbcTest
 - [DataJpaTest](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html#boot-features-testing-spring-boot-applications-testing-autoconfigured-jpa-test)
-- DataLdapTest
-- JdbcTest
+- DataJdbcTest
+- JdbcTest: 
 - JsonTest
 - RestClientTest
 - WebFluxTest
@@ -258,3 +257,7 @@ MockMvc is the main entry point for server-side Spring MVC test support. Using M
 - [Testing improvements in Spring](https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4)
 - [Spring Boot Testing](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html)
 - [Testing the web layer](https://spring.io/guides/gs/testing-web/)
+- [Testing Spring Filters without Mocking Pain](http://engineering.pivotal.io/post/testing-spring-filters-without-pain/)
+- [Integration test for authentication filter with Spring Boot](https://stackoverflow.com/questions/40071707/integration-test-for-authentication-filter-with-spring-boot)
+- [Spring Boot Test Data Layer Example with @DataJPATest](https://hellokoding.com/spring-boot-test-data-layer-example-with-datajpatest/)
+- [Testing JPA Queries with @DataJpaTest](https://reflectoring.io/spring-boot-data-jpa-test/)

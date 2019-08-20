@@ -6,9 +6,11 @@ import com.github.dnvriend.status.ResourceNotFoundException;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.*;
-
-import javax.websocket.server.PathParam;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PersonDataController {
@@ -25,14 +27,15 @@ public class PersonDataController {
     @GetMapping("/person")
     Page<PersonMvc> findAllPersons(Pageable pageable) {
         return repository.findAll(pageable)
-                .map(pd -> conversionService.convert(pd, PersonMvc.class));
+            .map(pd -> conversionService.convert(pd, PersonMvc.class));
     }
 
     @GetMapping("/person/{userId}")
     PersonMvc getPerson(@PathVariable("userId") Long userId) {
         return repository.findById(userId)
-                .map(pd -> conversionService.convert(pd, PersonMvc.class))
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("User with id %s", userId)));
+            .map(pd -> conversionService.convert(pd, PersonMvc.class))
+            .orElseThrow(
+                () -> new ResourceNotFoundException(String.format("User with id %s", userId)));
     }
 
     @PutMapping("/person")

@@ -1,100 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>simple-groovy-spring-shell</artifactId>
-    <name>${project.artifactId}</name>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>simple-groovy-spring-shell</artifactId>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>com.github.dnvriend.Application</mainClass>
+        </configuration>
+        <groupId>org.springframework.boot</groupId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <configuration>
+              <tasks>
+                <groovyc destdir="${project.build.outputDirectory}"
+                  listfiles="true" srcdir="${basedir}/src/main/java/">
+                  <classpath refid="maven.compile.classpath"/>
+                </groovyc>
+                <mkdir dir="${project.build.outputDirectory}"/>
+                <mkdir dir="${basedir}/src/main/java"/>
+                <taskdef classname="org.codehaus.groovy.ant.Groovyc"
+                  name="groovyc">
+                  <classpath refid="maven.compile.classpath"/>
+                </taskdef>
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <id>compile</id>
+            <phase>compile</phase>
+          </execution>
+          <execution>
+            <configuration>
+              <tasks>
+                <groovyc destdir="${project.build.testOutputDirectory}"
+                  listfiles="true" srcdir="${basedir}/src/test/java/">
+                  <classpath refid="maven.test.classpath"/>
+                </groovyc>
+                <mkdir dir="${project.build.testOutputDirectory}"/>
+                <mkdir dir="${basedir}/src/test/java"/>
+                <taskdef classname="org.codehaus.groovy.ant.Groovyc"
+                  name="groovyc">
+                  <classpath refid="maven.test.classpath"/>
+                </taskdef>
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <id>test-compile</id>
+            <phase>test-compile</phase>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <artifactId>groovy-all</artifactId>
+      <groupId>org.codehaus.groovy</groupId>
+      <type>pom</type>
+      <version>2.5.8</version>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-shell-starter</artifactId>
+      <groupId>org.springframework.shell</groupId>
+      <version>2.0.1.RELEASE</version>
+    </dependency>
+  </dependencies>
+  <modelVersion>4.0.0</modelVersion>
+  <name>${project.artifactId}</name>
+
+  <parent>
+    <artifactId>spring-boot-study</artifactId>
+    <groupId>com.github.dnvriend</groupId>
     <version>0.0.1-SNAPSHOT</version>
-    <parent>
-        <groupId>com.github.dnvriend</groupId>
-        <artifactId>spring-boot-study</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
+  </parent>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.5.8</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.shell</groupId>
-            <artifactId>spring-shell-starter</artifactId>
-            <version>2.0.1.RELEASE</version>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>com.github.dnvriend.Application</mainClass>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <configuration>
-                            <tasks>
-                                <mkdir dir="${basedir}/src/main/java"/>
-                                <taskdef name="groovyc"
-                                    classname="org.codehaus.groovy.ant.Groovyc">
-                                    <classpath refid="maven.compile.classpath"/>
-                                </taskdef>
-                                <mkdir dir="${project.build.outputDirectory}"/>
-                                <groovyc destdir="${project.build.outputDirectory}"
-                                    srcdir="${basedir}/src/main/java/" listfiles="true">
-                                    <classpath refid="maven.compile.classpath"/>
-                                </groovyc>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <configuration>
-                            <tasks>
-                                <mkdir dir="${basedir}/src/test/java"/>
-                                <taskdef name="groovyc"
-                                    classname="org.codehaus.groovy.ant.Groovyc">
-                                    <classpath refid="maven.test.classpath"/>
-                                </taskdef>
-                                <mkdir dir="${project.build.testOutputDirectory}"/>
-                                <groovyc destdir="${project.build.testOutputDirectory}"
-                                    srcdir="${basedir}/src/test/java/" listfiles="true">
-                                    <classpath refid="maven.test.classpath"/>
-                                </groovyc>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+  <version>0.0.1-SNAPSHOT</version>
 
 </project>

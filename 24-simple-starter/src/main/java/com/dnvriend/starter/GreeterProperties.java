@@ -1,12 +1,11 @@
 package com.dnvriend.starter;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,9 +13,10 @@ import java.util.List;
 @Builder(toBuilder = true)
 @ConfigurationProperties(prefix = "com.github.dnvriend.greeter")
 public class GreeterProperties {
+
     /**
-     * The annotation processor (pom dependency) will use comments
-     * as a description when processing this class
+     * The annotation processor (pom dependency) will use comments as a description when processing
+     * this class
      */
     private String userName = "dnvriend";
 
@@ -32,6 +32,7 @@ public class GreeterProperties {
     @AllArgsConstructor
     @Builder(toBuilder = true)
     public static class Messages {
+
         /**
          * A morning message
          */

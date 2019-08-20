@@ -1,12 +1,17 @@
 package com.github.dnvriend;
 
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-
-import javax.validation.constraints.*;
 
 @Component
 @ConfigurationProperties("my.props")
@@ -14,6 +19,7 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MyProperties {
+
     @NotEmpty(message = "name should not be null")
     @Size(min = 4, max = 30, message = "name should be between 4 and 30 chars")
     private String name;

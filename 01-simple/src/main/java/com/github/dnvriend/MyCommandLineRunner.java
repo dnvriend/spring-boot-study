@@ -1,15 +1,15 @@
 package com.github.dnvriend;
 
+import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.Stream;
-
 // see: https://www.baeldung.com/spring-boot-console-app
 @Component
 public class MyCommandLineRunner implements CommandLineRunner {
+
     // https://www.baeldung.com/spring-value-annotation
     @Value("${my.value:World!}")
     String myValue;

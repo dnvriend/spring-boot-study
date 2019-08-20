@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ActuatorConfig {
+
     @Bean
     public PersonStatsProbe dataSourceStatusProbe() {
         return new PersonStatsProbe();

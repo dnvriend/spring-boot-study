@@ -1,11 +1,10 @@
 package com.github.dnvriend.controllers;
 
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validator;
 import lombok.val;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
-
-import javax.validation.ConstraintViolationException;
-import javax.validation.Validator;
 
 @Service
 public class DefaultPersonService implements PersonService {

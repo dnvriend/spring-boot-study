@@ -1,12 +1,11 @@
 package com.github.dnvriend.meterbinder;
 
-import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.binder.MeterBinder;
-
 import java.util.concurrent.atomic.AtomicLong;
 
 public class PersonStatsProbe implements MeterBinder {
+
     private final AtomicLong putPersonCounter = new AtomicLong();
 
     private final AtomicLong getPersonCounter = new AtomicLong();

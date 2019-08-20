@@ -3,12 +3,11 @@ package com.github.dnvriend.services;
 import com.github.dnvriend.repositories.Triple;
 import com.github.dnvriend.repositories.TripleKeyId;
 import com.github.dnvriend.repositories.TripleRepository;
+import java.util.Optional;
+import java.util.stream.Stream;
 import org.joda.time.DateTime;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-import java.util.stream.Stream;
 
 @Service
 public class TripleService {
@@ -19,45 +18,46 @@ public class TripleService {
         this.tripleRepository = tripleRepository;
     }
 
-    public Triple saveTripleWithInterval(String k1, String k2, String k3, DateTime start, DateTime end, String value) {
+    public Triple saveTripleWithInterval(String k1, String k2, String k3, DateTime start,
+        DateTime end, String value) {
         return tripleRepository.save(
-                Triple.builder()
-                        .id(TripleKeyId.builder()
-                                .k1(k1)
-                                .k2(k2)
-                                .k3(k3)
-                                .start(start)
-                                .end(end)
-                                .build())
-                        .value(value)
-                        .build());
+            Triple.builder()
+                .id(TripleKeyId.builder()
+                    .k1(k1)
+                    .k2(k2)
+                    .k3(k3)
+                    .start(start)
+                    .end(end)
+                    .build())
+                .value(value)
+                .build());
     }
 
     public boolean exists(String k1, String k2, String k3, DateTime start, DateTime end) {
         return tripleRepository.exists(Example.of(
-                Triple.builder()
-                        .id(TripleKeyId.builder()
-                                .k1(k1)
-                                .k2(k2)
-                                .k3(k3)
-                                .start(start)
-                                .end(end)
-                                .build())
-                        .build())
+            Triple.builder()
+                .id(TripleKeyId.builder()
+                    .k1(k1)
+                    .k2(k2)
+                    .k3(k3)
+                    .start(start)
+                    .end(end)
+                    .build())
+                .build())
         );
     }
 
     public Optional<Triple> findOne(String k1, String k2, String k3, DateTime start, DateTime end) {
         return tripleRepository.findOne(Example.of(
-                Triple.builder()
-                        .id(TripleKeyId.builder()
-                                .k1(k1)
-                                .k2(k2)
-                                .k3(k3)
-                                .start(start)
-                                .end(end)
-                                .build())
-                        .build())
+            Triple.builder()
+                .id(TripleKeyId.builder()
+                    .k1(k1)
+                    .k2(k2)
+                    .k3(k3)
+                    .start(start)
+                    .end(end)
+                    .build())
+                .build())
         );
     }
 

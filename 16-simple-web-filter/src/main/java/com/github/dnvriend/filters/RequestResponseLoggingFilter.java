@@ -1,5 +1,14 @@
 package com.github.dnvriend.filters;
 
+import java.io.IOException;
+import java.util.Collection;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,21 +17,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Collection;
-
 @Component
 @Order(2)
 public class RequestResponseLoggingFilter implements Filter {
-    private static final Logger logger = LoggerFactory.getLogger(RequestResponseLoggingFilter.class);
+
+    private static final Logger logger = LoggerFactory
+        .getLogger(RequestResponseLoggingFilter.class);
 
     @Override
     public void doFilter(ServletRequest request,
-                         ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException {
+        ServletResponse response,
+        FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         resp.setHeader("X-FILTER-REQ-RESP-LOGGER-FILTER", "MY_VALUE");
@@ -53,9 +58,9 @@ public class RequestResponseLoggingFilter implements Filter {
         // after the chain
         logger.info("Logging Response :{}", resp.getContentType());
         resp.getHeaderNames()
-                .stream()
-                .map(x -> Tuple.builder()._1(x)._2(resp.getHeaderNames()).build())
-                .forEach(System.out::println);
+            .stream()
+            .map(x -> Tuple.builder()._1(x)._2(resp.getHeaderNames()).build())
+            .forEach(System.out::println);
     }
 }
 
@@ -63,6 +68,7 @@ public class RequestResponseLoggingFilter implements Filter {
 @AllArgsConstructor
 @Builder
 class Tuple {
+
     String _1;
     Collection<String> _2;
 }

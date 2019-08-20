@@ -9,16 +9,17 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class ConditionalOnResourceConfig {
+
     @Bean
-    @ConditionalOnResource(resources={"classpath:application.properties"})
-    public A beanA(){
+    @ConditionalOnResource(resources = {"classpath:application.properties"})
+    public A beanA() {
         return new A(); // will initiate as application.properties is in
         // classpath.
     }
 
     @Bean
-    @ConditionalOnResource(resources={"file:///e:/doc/data.txt"})
-    public B beanB(){
+    @ConditionalOnResource(resources = {"file:///e:/doc/data.txt"})
+    public B beanB() {
         return new B(); // will not initialize as the file is not
         // present in the given location.
     }
