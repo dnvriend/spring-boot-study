@@ -48,7 +48,8 @@
 <!--        <module>28-simple-spring-interceptor</module>-->
 <!--         <module>29-simple-spring-bom</module>-->
 <!--         <module>30-simple-groovy-spring-shell</module>-->
-         <module>31-simple-mockito</module>
+<!--         <module>31-simple-mockito</module>-->
+         <module>32-simple-javadoc</module>
     </modules>
 
     <dependencyManagement>
@@ -274,7 +275,11 @@
                         </execution>
                     </executions>
                 </plugin>
-
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

@@ -249,6 +249,17 @@ Spring provides a set of Servlet API 3.0 mock objects that are targeted at usage
 ## MockMvc
 MockMvc is the main entry point for server-side Spring MVC test support. Using MockMvc, a server is not started, but the layer below the server, where Spring handles the incoming HTTP request and hands it off to your controller. That way, almost the full stack is used, and your code will be called exactly the same way as if it was processing a real HTTP request, but without the cost of starting the server. To do that we will use Spring’s MockMvc, and we can ask for that to be injected in our test class. 
 
+## Integration Test
+Run a single integration test:
+
+```
+# run only integration test
+mvn -Dit.test="HelloWorldIT" surefire:integration-test
+
+# run unit and integration test
+mvn -Dit.test="HelloWorldIT" integration-test
+```
+
 ## Resources
 - [Baeldung Mockito Series](https://www.baeldung.com/mockito-series)
 - [Mockito](https://site.mockito.org/)
