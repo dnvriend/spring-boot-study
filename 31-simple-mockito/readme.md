@@ -48,6 +48,13 @@ Import the following package:
 import static org.mockito.Mockito.*;
 ```
 
+## Import AssertJ
+Import the following package:
+
+```
+import static org.assertj.core.api.Assertions.*;
+```
+
 ## The Mockito class
 The Mockito class enables mock creation, verification and stubbing. It is the main class that you use when you interact with mocks. It contains static methods (that you can import), and provides the `when/thenReturn` and `doXYZ/willXYZ` behavior. It also provides `verify` and `lenient` behavior. 
 
@@ -260,6 +267,17 @@ mvn -Dit.test="HelloWorldIT" surefire:integration-test
 mvn -Dit.test="HelloWorldIT" integration-test
 ```
 
+## Spring 5 JUnitConfig annotations
+The new `@SpringJunitConfig` and `@SpringWebJunitConfig` are added to Spring 5 to make test creation easier and faster.
+Click here [for more information about Spring JUnit Jupiter Testing Annotations](https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html).
+
+```
+@ExtendWith(SpringExtension.class): 
+@SpringJUnitConfig: combines ExtendsWith(SpringExtension.class) with ContextConfiguration from the Spring TestContext Framework
+@SpringJUnitWebConfig: combines ExtendsWith(SpringExtension.class) with ContextConfiguration and WebAppConfiguration from the Spring TestContext Framework
+@ContextConfiguration: defines class-level metadata that is used to determine how to load and configure an ApplicationContext for integration tests
+```
+
 ## Resources
 - [Baeldung Mockito Series](https://www.baeldung.com/mockito-series)
 - [Mockito](https://site.mockito.org/)
@@ -273,3 +291,13 @@ mvn -Dit.test="HelloWorldIT" integration-test
 - [Spring Boot Test Data Layer Example with @DataJPATest](https://hellokoding.com/spring-boot-test-data-layer-example-with-datajpatest/)
 - [Testing JPA Queries with @DataJpaTest](https://reflectoring.io/spring-boot-data-jpa-test/)
 - [Integration Testing of Spring MVC Applications: Write Clean Assertions with JsonPath](https://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-write-clean-assertions-with-jsonpath/)
+- [The SpringJUnitConfig and JUnitWebConfig annotations in Spring 5](https://www.baeldung.com/spring-5-junit-config)
+- [Maven Integration Test](https://www.baeldung.com/maven-integration-test)
+- [10 effective tips using maven](https://dzone.com/articles/10-effective-tips-on-using-maven)
+- [Setting the log level in Spring Boot when testing](https://www.baeldung.com/spring-boot-testing-log-level)
+- [Introduction to Spring Testing](https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html)
+- [Bean Validation Unit Testing](https://farenda.com/java/bean-validation-unit-testing/)
+- [Property binding in spring boot 2](https://spring.io/blog/2018/03/28/property-binding-in-spring-boot-2-0)
+- [Bean Validation 2.0](https://www.baeldung.com/javax-validation)
+- [Method constraints with Bean Validation 2.0](https://www.baeldung.com/javax-validation-method-constraints)
+- [Spring Boot Bean Validation](https://www.baeldung.com/spring-boot-bean-validation)

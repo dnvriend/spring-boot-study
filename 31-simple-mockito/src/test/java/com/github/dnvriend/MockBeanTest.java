@@ -15,7 +15,8 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class MockBeanTest {
+class
+MockBeanTest {
 
     @Mock
     NameService nameService;

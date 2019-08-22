@@ -1,59 +1,24 @@
 package com.github.dnvriend.domain;
 
-import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
 public class User {
 
+    @NotBlank
     private String name;
+
+    @Min(0)
+    @Max(120)
     private int age;
-
-    public User() {
-    }
-
-    public User(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof User)) {
-            return false;
-        }
-        User user = (User) o;
-        return age == user.age &&
-            name.equals(user.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, age);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-            "name='" + name + '\'' +
-            ", age=" + age +
-            '}';
-    }
 }

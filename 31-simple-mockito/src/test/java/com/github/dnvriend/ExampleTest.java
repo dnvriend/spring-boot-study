@@ -5,15 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.mockingDetails;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import com.github.dnvriend.domain.Car;
 import com.github.dnvriend.domain.User;
@@ -32,6 +24,7 @@ import org.mockito.Mock;
 import org.mockito.MockingDetails;
 import org.mockito.Mockito;
 import org.mockito.Spy;
+import org.mockito.exceptions.verification.NeverWantedButInvoked;
 import org.mockito.exceptions.verification.NoInteractionsWanted;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -137,7 +130,8 @@ class ExampleTest {
         ArgumentCaptor<String> arg = ArgumentCaptor.forClass(String.class);
 
         mockList.add("one");
-        Mockito.verify(mockList, never()).add(arg.capture());
+//        Mockito.verify(mockList, never()).add(arg.capture());
+        Mockito.verify(mockList, atMost(1)).add(arg.capture());
 
         assertEquals("one", arg.getValue());
     }

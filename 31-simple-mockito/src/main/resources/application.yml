@@ -7,3 +7,12 @@ my.names: foo,bar,baz
 # props
 my.props.name: Dennis
 my.props.age: 42
+
+logging.level:
+  root: error
+  com.github.dnvriend: info
+
+spring:
+  main:
+    banner-mode: 'off'
+    log-startup-info: false

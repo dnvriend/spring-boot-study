@@ -27,3 +27,5 @@ Consider defining a bean of type 'com.dnvriend.starter.Greeter' in your configur
 - [Custom starter github](https://github.com/eugenp/tutorials/tree/master/spring-boot-custom-starter)
 - [Configuration Metadata](https://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html)
 - [Reading a list of properties](https://stackoverflow.com/questions/12576156/reading-a-list-from-properties-file-and-load-with-spring-annotation-value)
+- [Testing @ConfigurationProperties in Spring Boot](https://tuhrig.de/testing-configurationproperties-in-spring-boot/)
+- [A quick guide to @TestPropertySource](https://www.baeldung.com/spring-test-property-source)

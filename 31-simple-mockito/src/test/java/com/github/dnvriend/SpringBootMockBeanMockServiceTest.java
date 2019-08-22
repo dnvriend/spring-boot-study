@@ -1,7 +1,5 @@
 package com.github.dnvriend;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.github.dnvriend.services.NameService;
 import com.github.dnvriend.services.UserService;
 import org.junit.jupiter.api.Test;
@@ -11,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * In this test we create the test configuration and wire up the test manually
