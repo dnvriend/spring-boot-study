@@ -28,6 +28,7 @@ forkJoinPool.submit(() ->
 
 ## Resources
 
+- [Doing stuff with Spring WebFlux - Lanky Dan](https://lankydan.dev/2018/03/15/doing-stuff-with-spring-webflux)
 - [Testing Reactive Streams Using StepVerifier and TestPublisher](https://www.baeldung.com/reactive-streams-step-verifier-test-publisher)
 - [Reactive Spring - Josh Long, Mark Heckler](https://www.youtube.com/watch?v=l7VBdWhtl7A)
 - [Reactor 3.0, a JVM foundation for Java 8 and Reactive Streams](https://www.youtube.com/watch?v=ctZGFTI3XI8)
