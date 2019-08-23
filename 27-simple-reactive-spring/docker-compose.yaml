@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  # credentials: postgres:postgres
+  # database: postgres
+  # jdbc:mysql://localhost:5432/postgres
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=postgres"

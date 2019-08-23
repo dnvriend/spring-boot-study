@@ -2,72 +2,195 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <groupId>com.github.dnvriend</groupId>
   <artifactId>simple-reactive-spring</artifactId>
+  <modelVersion>4.0.0</modelVersion>
+  <name>${project.artifactId}</name>
+<!--  <parent>-->
+<!--    <artifactId>spring-boot-study</artifactId>-->
+<!--    <groupId>com.github.dnvriend</groupId>-->
+<!--    <version>0.0.1-SNAPSHOT</version>-->
+<!--  </parent>-->
+
+  <version>0.0.1-SNAPSHOT</version>
+
+  <properties>
+    <spring.boot.data.r2dbc.version>0.1.0.BUILD-SNAPSHOT</spring.boot.data.r2dbc.version>
+    <spring.boot.version>2.2.0.M5</spring.boot.version>
+    <spring.version>5.2.0.RC1</spring.version>
+<!--    <h2.version>1.4.197</h2.version> &lt;!&ndash; java.lang.NoSuchMethodError: org.h2.result.ResultInterface.getColumnType(I)Lorg/h2/value/TypeInfo; &ndash;&gt;-->
+<!--    <h2.version>1.4.198</h2.version> &lt;!&ndash; java.lang.AbstractMethodError: io.r2dbc.h2.H2RowMetadata.getColumnNames()Ljava/util/Collection; &ndash;&gt;-->
+<!--    <h2.version>1.4.199</h2.version>-->
+  </properties>
+
+  <dependencies>
+<!--    <dependency>-->
+<!--      <groupId>com.h2database</groupId>-->
+<!--      <artifactId>h2</artifactId>-->
+<!--      <version>${h2.version}</version>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+      <version>${spring.boot.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+      <version>${spring.boot.version}</version>
+    </dependency>
+    <!-- next update in october -->
+    <dependency>
+      <groupId>org.springframework.boot.experimental</groupId>
+      <artifactId>spring-boot-starter-r2dbc</artifactId>
+      <version>0.1.0.M1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot.experimental</groupId>
+      <artifactId>spring-boot-starter-data-r2dbc</artifactId>
+      <version>0.1.0.M1</version>
+    </dependency>
+    <dependency>
+      <groupId>io.projectreactor.netty</groupId>
+      <artifactId>reactor-netty</artifactId>
+      <version>0.8.10.RELEASE</version>
+    </dependency>
+<!--    <dependency>-->
+<!--      <artifactId>spring-boot-starter-data-jpa</artifactId>-->
+<!--      <groupId>org.springframework.boot</groupId>-->
+<!--    </dependency>-->
+    <!-- https://github.com/spring-projects-experimental/spring-boot-r2dbc -->
+    <!-- https://github.com/spring-projects/spring-data-r2dbc -->
+    <!-- https://github.com/r2dbc -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-r2dbc</artifactId>
+      <version>1.0.0.M2</version>
+    </dependency>
+    <!-- https://github.com/r2dbc/r2dbc-h2 -->
+<!--    <dependency>-->
+<!--      <groupId>io.r2dbc</groupId>-->
+<!--      <artifactId>r2dbc-h2</artifactId>-->
+<!--      <version>1.0.0.BUILD-SNAPSHOT</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>io.r2dbc</groupId>-->
+<!--      <artifactId>r2dbc-pool</artifactId>-->
+<!--      <version>1.0.0.BUILD-SNAPSHOT</version>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>io.r2dbc</groupId>
+      <artifactId>r2dbc-client</artifactId>
+      <version>0.8.0.M8</version>
+    </dependency>
+    <!-- https://github.com/r2dbc/r2dbc-postgresql -->
+<!--    <dependency>-->
+<!--      <groupId>io.r2dbc</groupId>-->
+<!--      <artifactId>r2dbc-postgresql</artifactId>-->
+<!--      <version>0.8.0.M8</version>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <version>${spring.boot.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.5.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.13.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.projectreactor</groupId>
+      <artifactId>reactor-test</artifactId>
+      <version>3.2.10.RELEASE</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.8</version>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
       <plugin>
-        <artifactId>spring-boot-maven-plugin</artifactId>
         <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring.boot.version}</version>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M3</version>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
+        <version>3.0.0-M3</version>
       </plugin>
     </plugins>
   </build>
-  <dependencies>
-    <dependency>
-      <artifactId>spring-boot-starter</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-boot-starter-webflux</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>h2</artifactId>
-      <groupId>com.h2database</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <groupId>org.springframework.boot</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>junit-jupiter</artifactId>
-      <groupId>org.junit.jupiter</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>assertj-core</artifactId>
-      <groupId>org.assertj</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>reactor-test</artifactId>
-      <groupId>io.projectreactor</groupId>
-      <scope>test</scope>
-      <version>3.2.11.RELEASE</version>
-    </dependency>
-    <dependency>
-      <artifactId>lombok</artifactId>
-      <groupId>org.projectlombok</groupId>
-    </dependency>
-  </dependencies>
-  <modelVersion>4.0.0</modelVersion>
-  <name>${project.artifactId}</name>
 
-  <parent>
-    <artifactId>spring-boot-study</artifactId>
-    <groupId>com.github.dnvriend</groupId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
+  <repositories>
+    <repository>
+      <id>spring-snapshots</id>
+      <name>Spring Snapshots</name>
+      <url>https://repo.spring.io/snapshot</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>spring-libs-snapshot</id>
+      <url>https://repo.spring.io/libs-snapshot</url>
+    </repository>
+    <repository>
+      <id>jcenter</id>
+      <url>https://jcenter.bintray.com/</url>
+    </repository>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
 
-  <version>0.0.1-SNAPSHOT</version>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>spring-plugins-snapshot</id>
+      <url>https://repo.spring.io/plugins-snapshot</url>
+    </pluginRepository>
+  </pluginRepositories>
+
 
 </project>

@@ -196,6 +196,12 @@ class ReactorTest {
     }
 
     @Test
+    void valueFromFluxToIterable() {
+        Iterable<Integer> listOfIntegers = Flux.just(1, 2).toIterable();
+        assertThat(listOfIntegers).containsSequence(1, 2);
+    }
+
+    @Test
     void monoFromJust() {
         Mono<String> stringMono = Mono.just("foo");
         StepVerifier
@@ -383,11 +389,14 @@ class ReactorTest {
     }
 
     @Test
-    void foo() {
+    void fluxParallelismOnDefaultScheduler() {
         Flux.range(1, 10)
             .parallel(2)
             .subscribe(i -> System.out.println(Thread.currentThread().getName() + " -> " + i));
+    }
 
+    @Test
+    void fluxParallelismOnParallelScheduler() {
         Flux.range(1, 10)
             .parallel(2)
             .runOn(Schedulers.parallel())

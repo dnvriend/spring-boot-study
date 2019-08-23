@@ -2,7 +2,7 @@ package com.github.dnvriend.converters;
 
 import com.github.dnvriend.avro.Person;
 import com.github.dnvriend.controllers.PersonMvc;
-import com.github.dnvriend.repository.PersonData;
+import com.github.dnvriend.repositories.PersonData;
 import org.springframework.core.convert.converter.Converter;
 
 public class PersonMvcToPersonDataConverter implements Converter<PersonMvc, PersonData> {

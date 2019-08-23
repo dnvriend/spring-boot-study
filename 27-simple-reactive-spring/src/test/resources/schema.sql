@@ -1,0 +1,1 @@
+CREATE TABLE TODO (id integer identity primary key,user_id integer,title varchar(255),completed BOOLEAN);

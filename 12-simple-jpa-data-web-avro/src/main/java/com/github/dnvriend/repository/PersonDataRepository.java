@@ -1,4 +1,4 @@
-package com.github.dnvriend.repository;
+package com.github.dnvriend.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

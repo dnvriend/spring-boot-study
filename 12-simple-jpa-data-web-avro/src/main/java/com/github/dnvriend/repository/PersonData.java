@@ -1,4 +1,4 @@
-package com.github.dnvriend.repository;
+package com.github.dnvriend.repositories;
 
 import com.github.dnvriend.avro.Person;
 import com.github.dnvriend.converters.PersonAttributeConverter;

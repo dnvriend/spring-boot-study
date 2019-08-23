@@ -1,7 +1,7 @@
 package com.github.dnvriend.controllers;
 
-import com.github.dnvriend.repository.PersonData;
-import com.github.dnvriend.repository.PersonDataRepository;
+import com.github.dnvriend.repositories.PersonData;
+import com.github.dnvriend.repositories.PersonDataRepository;
 import com.github.dnvriend.status.ResourceNotFoundException;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Page;
