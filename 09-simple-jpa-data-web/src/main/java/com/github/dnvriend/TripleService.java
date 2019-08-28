@@ -21,13 +21,19 @@ public class TripleService {
     @Autowired
     private EntityManager em;
 
+    /*
+         if you request 1 field, then you get a String
+         if you request multiple fields, then you get an array
+     */
+    public <A> Stream<A> find(String queryString, Function<Object[], A> mapper, Function<Query, Query> query) {
+        return query
+            .apply(em.createNativeQuery(queryString))
+            .getResultStream()
+            .map(e -> mapper.apply((Object[]) e));
+    }
+
     public <A> Stream<A> find(String queryString, Function<Object[], A> mapper) {
-        // must be an @Entity and entities must have an @Id
-//        Query query = em.createNativeQuery("select k1 from triple", FirstKey.class);
-        // if you request 1 field, then you get a String
-        // if you request multiple fields, then you get an array
-        Query query = em.createNativeQuery(queryString);
-        return query.getResultStream().map(e -> mapper.apply((Object[]) e));
+        return find(queryString, mapper, Function.identity());
     }
 
     public Triple saveTriple(String k1, String k2, String k3, String value) {
