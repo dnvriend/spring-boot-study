@@ -1,20 +1,39 @@
 package com.github.dnvriend.controllers;
 
-import java.util.Collections;
-import java.util.List;
-import org.springframework.http.HttpStatus;
+import com.github.dnvriend.repositories.Person;
+import com.github.dnvriend.repositories.PersonRepository;
+import java.util.Optional;
+import java.util.stream.Stream;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/person")
 public class PersonController {
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<Person> getPersons() {
-        return Collections.singletonList(Person.builder().id(1).name("dnvriend").age(42).build());
+    private final PersonRepository personRepository;
+
+    public PersonController(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
+
+    @GetMapping("/person")
+    public Stream<Person> getPeople() {
+        return personRepository.getPeople();
+    }
+
+    @GetMapping("/person/{id}")
+    public Optional<Person> getPersonById(@PathVariable("id") int id) {
+        return personRepository.getPersonById(id);
+    }
+
+    @GetMapping("/person/{name}")
+    public Stream<Person> getPeopleByName(@PathVariable("name") String name) {
+        return personRepository.getPeopleByName(name);
+    }
+
+    @GetMapping("/person/{age}")
+    public Stream<Person> getPeopleByAge(@PathVariable("age") int age) {
+        return personRepository.getPeopleByAge(age);
     }
 }
