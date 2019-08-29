@@ -11,3 +11,5 @@
 - [JPA - Composite Primary Key](https://www.baeldung.com/jpa-composite-primary-keys)
 - [JPA - Data Query by Example](https://www.baeldung.com/spring-data-query-by-example)
 - [spring-data-jpa - Reference](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
+- [Spring DevTools Baeldung](https://www.baeldung.com/spring-boot-devtools)
+- 

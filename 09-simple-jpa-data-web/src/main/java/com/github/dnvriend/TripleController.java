@@ -41,6 +41,11 @@ public class TripleController {
         return tripleService.find(SecondKey.SELECT_ALL, SecondKey::fromArray);
     }
 
+    @GetMapping("/thirdkey")
+    public Stream<ThirdKey> findThirdKey() {
+        return tripleService.find(SecondKey.SELECT_ALL, ThirdKey::fromArray);
+    }
+
     @PutMapping("/{k1}/{k2}/{k3}")
     public void putTriple(
         @PathVariable("k1") @NonNull String k1,

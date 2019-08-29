@@ -1,7 +1,7 @@
 package com.github.dnvriend;
 
 public class FirstKey {
-    public static String SELECT_ALL = "select id_k1, id_k2 from triple";
+    public static String SELECT_ALL = "select id_k1, id_k2, id_k3 from triple";
 
     public static FirstKey fromArray(Object[] that) {
         return new FirstKey((String) that[0]);

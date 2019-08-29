@@ -1,5 +1,6 @@
 package com.github.dnvriend;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -29,6 +30,11 @@ public class TripleService {
         return query
             .apply(em.createNativeQuery(queryString))
             .getResultStream()
+            .peek(e -> {
+                System.out.println("Peeking array:");
+                Object[] xs = (Object[]) e;
+                Arrays.stream(xs).forEach(obj -> System.out.println("Element: " + obj.getClass().getName()));
+            })
             .map(e -> mapper.apply((Object[]) e));
     }
 
