@@ -1,44 +1,58 @@
-//package com.github.dnvriend.config;
-//
-//import javax.servlet.Filter;
-//import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-//import org.springframework.beans.factory.support.GenericBeanDefinition;
-//import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-//import org.springframework.boot.context.properties.EnableConfigurationProperties;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
-//import org.springframework.core.type.AnnotationMetadata;
-//
-//@Configuration
-//@ConditionalOnProperty(prefix = "com.dnvriend.filters", value = "separate", havingValue = "true")
-//@EnableConfigurationProperties(FilterProperties.class)
-//public class SeparateFiltersConfig implements ImportBeanDefinitionRegistrar {
-//
-//    private final FilterProperties filterProperties;
-//
-//    public SeparateFiltersConfig(FilterProperties filterProperties) {
-//        this.filterProperties = filterProperties;
-//    }
-//
-//    @Override
-//    public void registerBeanDefinitions(
-//        AnnotationMetadata importingClassMetadata,
-//        BeanDefinitionRegistry registry) {
-//        for (Class<? extends Filter> filterClass : filterProperties.getFilters()) {
-//            registry.registerBeanDefinition(
-//                determineBeanName(filterClass),
-//                createBeanDefinition(filterClass)
-//            );
-//        }
-//    }
-//
-//    static String determineBeanName(Class<?> beanClass) {
-//        return beanClass.getName().toLowerCase();
-//    }
-//
-//    static GenericBeanDefinition createBeanDefinition(Class<?> beanClass) {
-//        GenericBeanDefinition filterClassBeanDefinition = new GenericBeanDefinition();
-//        filterClassBeanDefinition.setBeanClass(beanClass);
-//        return filterClassBeanDefinition;
-//    }
-//}
+package com.github.dnvriend.config;
+
+import com.github.dnvriend.filters.FirstFilter;
+import com.github.dnvriend.filters.FourthFilter;
+import com.github.dnvriend.filters.SecondFilter;
+import com.github.dnvriend.filters.ThirdFilter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Slf4j
+@Configuration
+@ConditionalOnProperty(prefix = "com.dnvriend.filter", value = "separate", havingValue = "true")
+public class SeparateFiltersConfig  {
+
+    @Bean
+    public FilterRegistrationBean<FirstFilter> firstFilterRegistrationBean() {
+        log.debug("Adding FilterRegistrationBean for FirstFilter");
+        FilterRegistrationBean<FirstFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(new FirstFilter());
+        filterRegistrationBean.setOrder(0);
+        filterRegistrationBean.addUrlPatterns("*");
+        return filterRegistrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean<SecondFilter> secondFilterRegistrationBean() {
+        log.debug("Adding FilterRegistrationBean for SecondFilter");
+        FilterRegistrationBean<SecondFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(new SecondFilter());
+        filterRegistrationBean.setOrder(1);
+        filterRegistrationBean.addUrlPatterns("*");
+        return filterRegistrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean<ThirdFilter> thirdFilterRegistrationBean() {
+        log.debug("Adding FilterRegistrationBean for ThirdFilter");
+        FilterRegistrationBean<ThirdFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(new ThirdFilter());
+        filterRegistrationBean.setOrder(2);
+        filterRegistrationBean.addUrlPatterns("*");
+        return filterRegistrationBean;
+    }
+
+
+    @Bean
+    public FilterRegistrationBean<FourthFilter> fourthFilterRegistrationBean() {
+        log.debug("Adding FilterRegistrationBean for FourthFilter");
+        FilterRegistrationBean<FourthFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(new FourthFilter());
+        filterRegistrationBean.setOrder(3);
+        filterRegistrationBean.addUrlPatterns("*");
+        return filterRegistrationBean;
+    }
+}

@@ -8,7 +8,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
 @NoArgsConstructor
-@ConfigurationProperties("com.dnvriend")
+@ConfigurationProperties("com.dnvriend.filter")
 public class FilterProperties {
+    private boolean wrapped;
+    private boolean separate;
+    private boolean config;
     private List<Class<? extends Filter>> filters;
 }

@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Component
-@Order(1)
+//@Component
+//@Order(1)
 public class AddHeaderFilter implements Filter {
 
     private final Logger logger = LoggerFactory.getLogger(getClass().getName());

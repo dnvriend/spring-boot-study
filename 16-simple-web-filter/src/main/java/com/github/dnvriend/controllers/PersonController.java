@@ -2,7 +2,9 @@ package com.github.dnvriend.controllers;
 
 import com.github.dnvriend.repositories.Person;
 import com.github.dnvriend.repositories.PersonRepository;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +20,8 @@ public class PersonController {
     }
 
     @GetMapping("/person")
-    public Stream<Person> getPeople() {
-        return personRepository.getPeople();
+    public List<Person> getPeople() {
+        return personRepository.getPeople().collect(Collectors.toList());
     }
 
     @GetMapping("/person/{id}")

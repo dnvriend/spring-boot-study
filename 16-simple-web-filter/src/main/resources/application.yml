@@ -1,4 +1,22 @@
 server:
   port: 8080
+com:
+  dnvriend:
+    filter:
+      wrapped: false
+      separate: false
+      config: true
+      filters:
+        - com.github.dnvriend.filters.FourthFilter
+        - com.github.dnvriend.filters.SecondFilter
+        - com.github.dnvriend.filters.ThirdFilter
+        - com.github.dnvriend.filters.FirstFilter
 
-com.dnvriend.filters.separate: false
+
+logging:
+  level:
+    root: info
+    com.github.dnvriend: debug
+    org.springframework.boot.web.servlet.ServletContextInitializerBeans: debug
+
+debug: true

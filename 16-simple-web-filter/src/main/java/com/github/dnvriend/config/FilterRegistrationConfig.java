@@ -1,82 +1,94 @@
 package com.github.dnvriend.config;
 
-import com.codepoetics.protonpack.StreamUtils;
+import com.github.dnvriend.filters.FirstFilter;
+import com.github.dnvriend.filters.SecondFilter;
+import com.github.dnvriend.filters.ThirdFilter;
+import java.util.Arrays;
+import java.util.List;
 import javax.servlet.Filter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
-import org.springframework.core.type.AnnotationMetadata;
 
+/**
+ * Does not work, because @Bean FilterRegistrationBean and @Bean Filters are picked up via
+ * classpath scanning, indexed and initialized and added to the ServletContextInitializerBean
+ */
+@Slf4j
 @Configuration
-//@ConditionalOnProperty(prefix = "com.dnvriend.filters", value = "separate", havingValue = "false")
+@ConditionalOnProperty(prefix = "com.dnvriend.filter", value = "config", havingValue = "true")
 @EnableConfigurationProperties(FilterProperties.class)
-public class FilterRegistrationConfig implements BeanFactoryAware,
-    ApplicationContextAware, ImportBeanDefinitionRegistrar {
+public class FilterRegistrationConfig implements BeanFactoryPostProcessor  {
 
     @Override
-    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        System.out.println("====>>>> Setting BeanFactory");
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
+        throws BeansException {
+        List<Class <? extends Filter>> filters = Arrays.asList(
+            FirstFilter.class,
+            ThirdFilter.class,
+            SecondFilter.class
+        );
+        initializeFilters(filters, (DefaultListableBeanFactory) beanFactory);
     }
 
-    private final FilterProperties filterProperties;
-
-    public FilterRegistrationConfig(FilterProperties filterProperties) {
-        this.filterProperties = filterProperties;
-        System.out.println("==========>>>>> Creating FilterRegConfig");
+    public FilterRegistrationConfig() {
+        log.debug("Created FilterRegistrationConfig via default constructor");
     }
 
-    @Override
-    public void registerBeanDefinitions(
-        AnnotationMetadata importingClassMetadata,
-        BeanDefinitionRegistry registry) {
-        System.out.println("=======>>>> registerBeanDefs");
-//        StreamUtils
-//            .zipWithIndex(filterProperties.getFilters().stream())
-//            .forEach(indexed -> {
-//                GenericBeanDefinition filterBeanDefinition = createFilterBeanDefinition(indexed.getValue());
-//                String filterBeanName = determineBeanName(indexed.getValue());
-//                registry.registerBeanDefinition(filterBeanName, filterBeanDefinition);
-//                GenericBeanDefinition filterRegistrationBean =
-//                registry.registerBeanDefinition(
-//                    String.format("FilterRegistrationBean%s", filterBeanName), indexed.getIndex());
-//            });
+    public void initializeFilters(List<Class<? extends Filter>> filters, DefaultListableBeanFactory beanFactory) {
+        filters.forEach(filterClass -> {
+            String filterBeanName = determineBeanName(filterClass);
+            log.debug("Register filter: {} with name: {}", filterClass.getName(), filterBeanName);
+            beanFactory.registerBeanDefinition(
+                filterBeanName,
+                createFilterBeanDefinition(filterClass)
+            );
+        });
+
+        for (int order = 0; order < filters.size(); order++) {
+            Class<? extends Filter> filterClass = filters.get(order);
+            String beanName = determineFilterRegistrationName(filterClass);
+            log.debug("Registering FilterRegistrationBean with name: {} and order {}", beanName, order);
+            Object filterInstance = beanFactory.getBean(filterClass);
+            beanFactory.registerBeanDefinition(
+                beanName,
+                createFilterRegistrationBean(filterInstance, order)
+            );
+        }
     }
 
-//    static String determineBeanName(Class<? extends Filter> beanClass) {
-//        return beanClass.getName().toLowerCase();
-//    }
-//
-//    static GenericBeanDefinition createFilterBeanDefinition(
-//        Class<? extends Filter> filterClass) {
-//        GenericBeanDefinition filterClassBeanDefinition = new GenericBeanDefinition();
-//        filterClassBeanDefinition.setBeanClass(filterClass);
-//        return filterClassBeanDefinition;
-//    }
-//
-//    static GenericBeanDefinition createFilterRegistrationBean(
-//        ,
-//        long order) {
-//        GenericBeanDefinition filterRegistrationBeanDefinition = new GenericBeanDefinition();
-//        MutablePropertyValues mpv = filterRegistrationBeanDefinition.getPropertyValues();
-//        filterRegistrationBeanDefinition.setBeanClass(FilterRegistrationBean.class);
-//        mpv.add("order", order);
-//        mpv.add("filter", )
-//        return filterRegistrationBeanDefinition;
-//    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        System.out.println("=====>>> setApplicationContext");
+    private static String determineBeanName(Class<? extends Filter> beanClass) {
+        return beanClass.getSimpleName();
     }
 
+    private static String determineFilterRegistrationName(Class<? extends Filter> filterClass) {
+        String registrationBeanName = "FilterRegistrationBean";
+        String filterBeanName = filterClass.getSimpleName();
+        return String.format("%s%s", registrationBeanName, filterBeanName);
+    }
+
+    private static GenericBeanDefinition createFilterBeanDefinition(
+        Class<? extends Filter> filterClass) {
+        GenericBeanDefinition filterClassBeanDefinition = new GenericBeanDefinition();
+        filterClassBeanDefinition.setBeanClass(filterClass);
+        return filterClassBeanDefinition;
+    }
+
+    private static GenericBeanDefinition createFilterRegistrationBean(Object filterInstance,
+        int order) {
+        GenericBeanDefinition filterRegistrationBeanDefinition = new GenericBeanDefinition();
+        MutablePropertyValues mpv = filterRegistrationBeanDefinition.getPropertyValues();
+        filterRegistrationBeanDefinition.setBeanClass(FilterRegistrationBean.class);
+        mpv.add("filter", filterInstance);
+        mpv.add("order", order);
+        return filterRegistrationBeanDefinition;
+    }
 }

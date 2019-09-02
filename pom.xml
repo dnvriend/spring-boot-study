@@ -26,14 +26,14 @@
 <!--        <module>06-type-conversion</module>-->
 <!--        <module>07-simple-actuator</module>-->
 <!--        <module>08-simple-prometheus-grafana</module>-->
-        <module>09-simple-jpa-data-web</module>
+<!--        <module>09-simple-jpa-data-web</module>-->
 <!--        <module>10-springfox-swagger</module>-->
 <!--        <module>11-simple-web-versioning</module>-->
 <!--        <module>12-simple-jpa-data-web-avro</module>-->
 <!--        <module>13-simple-jpa-data-index</module>-->
 <!--        <module>14-simple-jpa-data-timestamp</module>-->
 <!--        <module>15-simple-prometheus-custom-metrics</module>-->
-<!--        <module>16-simple-web-filter</module>-->
+        <module>16-simple-web-filter</module>
 <!--        <module>17-simple-db-migration-flyway</module>-->
 <!--        <module>18-simple-web-kotlin</module>-->
 <!--        <module>19-simple-assertj-junit5</module>-->
