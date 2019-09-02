@@ -5,7 +5,6 @@ import javax.servlet.Filter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -22,6 +21,7 @@ import org.springframework.core.env.Environment;
 public class FilterRegistrationConfig {
 
     @Bean
+//    @ConditionalOnProperty(prefix = "com.dnvriend.filter", value = "config", havingValue = "true")
     public static BeanFactoryPostProcessor beanFactoryPostProcessor(final Environment environment) {
         return beanFactory -> {
             BindResult<FilterProperties> bindResult = Binder.get(environment)
