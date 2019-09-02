@@ -9,14 +9,14 @@ com:
       filters:
         - com.github.dnvriend.filters.FourthFilter
         - com.github.dnvriend.filters.SecondFilter
-        - com.github.dnvriend.filters.ThirdFilter
         - com.github.dnvriend.filters.FirstFilter
+        - com.github.dnvriend.filters.ThirdFilter
 
 
 logging:
   level:
     root: info
     com.github.dnvriend: debug
-    org.springframework.boot.web.servlet.ServletContextInitializerBeans: debug
+    org.springframework.boot.web.servlet.ServletContextInitializerBeans: trace
 
 debug: true
