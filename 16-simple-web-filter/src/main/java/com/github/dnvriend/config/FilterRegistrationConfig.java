@@ -3,8 +3,10 @@ package com.github.dnvriend.config;
 import java.util.List;
 import javax.servlet.Filter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -18,7 +20,14 @@ import org.springframework.core.env.Environment;
 @Slf4j
 @Configuration
 @ConditionalOnProperty(prefix = "com.dnvriend.filter", value = "config", havingValue = "true")
-public class FilterRegistrationConfig {
+public class FilterRegistrationConfig implements BeanPostProcessor {
+
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName)
+        throws BeansException {
+        log.debug("beanName: {}, beanClass: {}", beanName, bean.getClass().getName());
+        return bean;
+    }
 
     @Bean
 //    @ConditionalOnProperty(prefix = "com.dnvriend.filter", value = "config", havingValue = "true")

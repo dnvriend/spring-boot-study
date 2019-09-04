@@ -1,8 +1,5 @@
-server:
-  port: 8080
-
 logging:
   level:
     root: info
     com.github.dnvriend: debug
-#    org.springframework: trace
+    org.springframework: trace
