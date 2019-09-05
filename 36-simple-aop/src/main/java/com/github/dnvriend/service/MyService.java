@@ -1,5 +1,6 @@
 package com.github.dnvriend.service;
 
+import com.github.dnvriend.annotation.LogAnotherMessage;
 import com.github.dnvriend.annotation.LogExecutionTime;
 import com.github.dnvriend.annotation.LogMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ public class MyService {
 
     @LogExecutionTime
     @LogMessage("Hello World!")
+    @LogAnotherMessage("This is another message")
     public void say(@NonNull String msg) {
         log.debug(msg);
     }

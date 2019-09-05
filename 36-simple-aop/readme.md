@@ -167,3 +167,5 @@ public @interface LogExecutionTime {
 - [Baeldung - An introduction to putpoint expressions in spring](https://www.baeldung.com/spring-aop-pointcut-tutorial)
 - [Baeldung - Comparing spring aop and aspectj](https://www.baeldung.com/spring-aop-vs-aspectj)
 - [Baeldung - An introduction to advice types in spring](https://www.baeldung.com/spring-aop-advice-tutorial)
+- [spring-aop v4.3.15 documentation](https://docs.spring.io/spring/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html)
+- [Aspect Oriented Programming with Spring Boot](https://niels.nu/blog/2017/spring-boot-aop.html)
