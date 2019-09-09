@@ -26,6 +26,18 @@ class WebClientTest {
     WebClient client = WebClient.create("https://jsonplaceholder.typicode.com");
 
     @Test
+    void getPostsFlux() {
+        Flux<Post> fluxOfPost = client.get()
+            .uri("/posts")
+            .accept(MediaType.APPLICATION_JSON)
+            .retrieve()
+            .bodyToFlux(Post.class);
+
+        Iterable<Post> listOfPost = fluxOfPost.toIterable();
+        assertThat(listOfPost).isNotEmpty();
+    }
+
+    @Test
     void getTodoMono() {
         Mono<Todo> todoMono = client.get()
             .uri("/todos/{id}", 1)
@@ -37,17 +49,5 @@ class WebClientTest {
         assertThat(expected.getId()).isEqualTo(1);
         assertThat(expected.isCompleted()).isFalse();
         assertThat(expected.getUserId()).isEqualTo(1);
-    }
-
-    @Test
-    void getPostsFlux() {
-        Flux<Post> fluxOfPost = client.get()
-            .uri("/posts")
-            .accept(MediaType.APPLICATION_JSON)
-            .retrieve()
-            .bodyToFlux(Post.class);
-
-        Iterable<Post> listOfPost = fluxOfPost.toIterable();
-        assertThat(listOfPost).isNotEmpty();
     }
 }

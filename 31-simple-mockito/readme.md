@@ -278,6 +278,69 @@ Click here [for more information about Spring JUnit Jupiter Testing Annotations]
 @ContextConfiguration: defines class-level metadata that is used to determine how to load and configure an ApplicationContext for integration tests
 ```
 
+## strict
+Mockito 1 and 2 don't have the same "strictness" level.
+Besides by using Mockito 2 with JUnit 4 or 5 the default level will be still different.
+
+To sum up:
+
+3 levels of strictness:
+
+- LENIENT : minimum strictness
+- WARN : extra warnings emitted to the console
+- STRICT_STUBS : ensures clean tests by throwing exception if potential misuse but may also produce some false positives.
+
+Default effective level according to the APIs used :
+
+- Mockito 1 : LENIENT
+- Mockito 2 with JUnit 4 : WARN
+- Mockito 2 with JUnit 5 (MockitoExtension.class) : STRICT_STUBS
+- Mockito 3 : planned to be STRICT_STUBS.
+
+More details
+
+The actual Mockito documentation is very clear about that :
+
+The Strictness javadoc states :
+
+```
+Configures the "strictness" of Mockito during a mocking session.A session typically maps to a single test method invocation. Strictness drives cleaner tests and better productivity.The easiest way to leverage enhanced Strictness is usingMockito's JUnit support (MockitoRule or MockitoJUnitRunner).If you cannot use JUnit support MockitoSession is the way to go.
+
+How strictness level influences the behavior of the test (mocking session)?
+
+1.Strictness.LENIENT - no added behavior.The default of Mockito 1.x.Recommended only if you cannot use STRICT_STUBS nor WARN.
+
+2.Strictness.WARN - helps keeping tests clean and improves debuggability.Reports console warnings about unused stubsand stubbing argument mismatch (see org.mockito.quality.MockitoHint).The default behavior of Mockito 2.x when JUnitRule or MockitoJUnitRunner are used. Recommended if you cannot use STRICT_STUBS.
+
+3.Strictness.STRICT_STUBS - ensures clean tests, reduces test code duplication, improves debuggability.Best combination of flexibility and productivity. Highly recommended.Planned as default for Mockito v3.See STRICT_STUBS for the details.
+```
+
+But whatever the thrown exception associated to the message
+
+```
+"has following stubbing(s) with different arguments"
+```
+
+seems to be a excessively strict check. The exception message proves that in a some way :
+
+```
+However, there are legit scenarios when this exception generates false negative signal:
+```
+
+stubbed method is intentionally invoked with different arguments by code under test
+So forbidding it by default seems to be too much.
+
+So if you use JUnit 5, as alternative to STRICT_STUBS you could use WARNING but you generally want to avoid LENIENT that is too quiet.
+
+In addition to MockitoExtension, the mockito-junit-jupiter library provides @MockitoSettings that may be used at the method level as well as at the class level.
+
+Alternatively:
+
+```java
+lenient().when(testClass.booleanMethod(eq(true))).thenReturn(1);
+lenient().when(testClass.booleanMethod(eq(false))).thenReturn(2);
+```
+
 ## Resources
 - [Baeldung Mockito Series](https://www.baeldung.com/mockito-series)
 - [Mockito](https://site.mockito.org/)
