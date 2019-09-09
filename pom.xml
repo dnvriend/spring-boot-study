@@ -51,6 +51,7 @@
          <module>31-simple-mockito</module>
 <!--         <module>32-simple-javadoc</module>-->
 <!--         <module>35-simple-lifecycle</module>-->
+         <module>36-simple-aop</module>
     </modules>
 
     <dependencyManagement>
