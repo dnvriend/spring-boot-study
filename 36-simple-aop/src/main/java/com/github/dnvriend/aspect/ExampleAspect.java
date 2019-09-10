@@ -4,8 +4,6 @@ import com.github.dnvriend.annotation.LogAnotherMessage;
 import com.github.dnvriend.annotation.LogMessage;
 import java.lang.reflect.Method;
 import java.util.Optional;
-import javax.servlet.ServletRequestAttributeEvent;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -61,6 +59,7 @@ public class ExampleAspect {
             .orElse("");
     }
 
+    // alternatively you can 'inject' the annotation instance
     @Around("execution(public * *(..)) && @annotation(logAnotherMessage)")
     public Object logAnotherMessage(ProceedingJoinPoint joinPoint, LogAnotherMessage logAnotherMessage) throws Throwable {
         // alternatively we can just inject the annotation
@@ -78,8 +77,14 @@ public class ExampleAspect {
      * Get request bound to the Thread
      */
     private HttpServletRequest getHttpServletRequest() {
+        // ServletRequestAttributes
         RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) requestAttributes;
         return servletRequestAttributes.getRequest();
     }
+
+    /*
+        ReflectionUtils can be used to search eg. for Methods
+        AnnotationUtils can be used to search for annotations on class, method etc
+     */
 }

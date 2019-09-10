@@ -151,7 +151,22 @@ public @interface LogExecutionTime {
 - The `@Target` annotation tells us where our annotation will be applicable. Here we are using ElementType.Method, which means it will only work on methods. If we tried to use the annotation anywhere else, then our code would fail to compile. This behavior makes sense, as our annotation will be used for logging method execution time.
 - The `@Retention` just states whether the annotation will be available to the JVM at runtime or not. By default it is not, so Spring AOP would not be able to see the annotation. This is why it's been reconfigured.
 
+## Injecting HttpServletRequest
+In Spring-aop, you cannot inject the HttpServletRequest. But, we can use the `RequestContextHolder`.
+In every request, the DispatcherServlet binds the current HttpServletRequest to a static 
+threadlocal object in the RequestContextHolder. You can retrieve it with the same Thread with:
 
+```java
+HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getResponse();
+```
+
+## Advice gets called twice
+There are some causes:
+
+1. Do you use JavaConfig or xml? If you're using both, it could be that the Aspect is being processed two times by the Spring IoC container.
+2. I don't annotate aspects with @Component annotation, try to remove it, maybe because of that is being processed twice by Spring.
+3. The advice is declared as @RequestScope. In that case the same bean is registered twice as an interceptor with different names.  
 
 ## Resources
 - [spring-core documentation](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html)
@@ -169,3 +184,5 @@ public @interface LogExecutionTime {
 - [Baeldung - An introduction to advice types in spring](https://www.baeldung.com/spring-aop-advice-tutorial)
 - [spring-aop v4.3.15 documentation](https://docs.spring.io/spring/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html)
 - [Aspect Oriented Programming with Spring Boot](https://niels.nu/blog/2017/spring-boot-aop.html)
+- [How to inject HttpServletRequest in Spring AOP](https://stackoverflow.com/questions/19271807/how-to-inject-httpservletrequest-into-a-spring-aop-request-custom-scenario)
+- [Advice is being called twice](https://stackoverflow.com/questions/7900905/spring-aop-advice-is-called-twice)
