@@ -364,3 +364,4 @@ lenient().when(testClass.booleanMethod(eq(false))).thenReturn(2);
 - [Bean Validation 2.0](https://www.baeldung.com/javax-validation)
 - [Method constraints with Bean Validation 2.0](https://www.baeldung.com/javax-validation-method-constraints)
 - [Spring Boot Bean Validation](https://www.baeldung.com/spring-boot-bean-validation)
+- [A Unit Testing Practitioner's Guide to Everyday Mockito](https://www.toptal.com/java/a-guide-to-everyday-mockito)

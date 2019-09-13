@@ -122,6 +122,14 @@ The following example defines a pointcut named anyOldTransfer that matches the e
 private void anyOldTransfer() {}// the pointcut signature
 ```
 
+## Advices
+An advice is associated with a pointcut expression. An advice runs [@Before](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#aop-advice-before), @After or [@Around](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#aop-ataspectj-around-advice) method executions matched by the pointcut. The pointcut expression may either be a simple reference to a named pointcut or a pointcut expression declared in place.
+
+## @Around advice
+see [@Around advice](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#aop-ataspectj-around-advice)
+
+The value returned by the around advice is the return value seen by the caller of the method. 
+
 ## Pointcut Designators
 see: [supported pointcut designators](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#aop-pointcuts-designators)
 
@@ -168,6 +176,15 @@ There are some causes:
 2. I don't annotate aspects with @Component annotation, try to remove it, maybe because of that is being processed twice by Spring.
 3. The advice is declared as @RequestScope. In that case the same bean is registered twice as an interceptor with different names.  
 
+## Throwing an exception
+
+```java
+import org.springframework.web.server;
+import org.springframework.http.HttpStatus;
+
+throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Actor not found");
+```
+
 ## Resources
 - [spring-core documentation](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html)
 - [spring-aop documentation](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#aop)
@@ -186,3 +203,6 @@ There are some causes:
 - [Aspect Oriented Programming with Spring Boot](https://niels.nu/blog/2017/spring-boot-aop.html)
 - [How to inject HttpServletRequest in Spring AOP](https://stackoverflow.com/questions/19271807/how-to-inject-httpservletrequest-into-a-spring-aop-request-custom-scenario)
 - [Advice is being called twice](https://stackoverflow.com/questions/7900905/spring-aop-advice-is-called-twice)
+- [Spring ResponseStatusException](https://www.baeldung.com/spring-response-status-exception)
+- [Logging aspect in RESTful web service – spring aop (log requests/responses)](https://makeinjava.com/logging-aspect-restful-web-service-spring-aop-request-response/)
+- [adding authentication to spring controller methods with aspectj](http://codebrane.com/blog/2014/01/23/adding-authentication-to-spring-controller-methods-with-aspectj/)
