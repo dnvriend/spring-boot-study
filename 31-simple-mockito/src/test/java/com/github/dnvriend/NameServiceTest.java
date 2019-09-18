@@ -3,7 +3,7 @@ package com.github.dnvriend;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import com.github.dnvriend.services.NameService;
+import com.github.dnvriend.service.NameService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

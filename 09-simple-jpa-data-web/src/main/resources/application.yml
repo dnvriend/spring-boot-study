@@ -7,7 +7,7 @@ spring:
       enabled: true
       path: /h2_console
   datasource:
-    url: jdbc:h2:mem:simple-jpa-data-web
+    url: jdbc:h2:mem:simple-jpa-data-web;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=FALSE;IGNORECASE=FALSE
     username: sa
     password:
     driverClassName=: org.h2.Driver

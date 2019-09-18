@@ -22,7 +22,7 @@
         <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
         <configuration>
           <classes>
-            <param>com.github.dnvriend.repositories.PersonEntity</param>
+            <param>com.github.dnvriend.repository.PersonEntity</param>
           </classes>
         </configuration>
         <groupId>org.assertj</groupId>

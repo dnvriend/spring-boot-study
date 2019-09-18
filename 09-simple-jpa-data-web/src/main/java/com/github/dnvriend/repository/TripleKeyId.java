@@ -1,4 +1,4 @@
-package com.github.dnvriend;
+package com.github.dnvriend.repository;
 
 import java.io.Serializable;
 import javax.persistence.Embeddable;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Embeddable
-class TripleKeyId implements Serializable {
+public class TripleKeyId implements Serializable {
 
     private String k1;
     private String k2;

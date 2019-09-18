@@ -1,4 +1,4 @@
-package com.github.dnvriend.repositories;
+package com.github.dnvriend.repository;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;

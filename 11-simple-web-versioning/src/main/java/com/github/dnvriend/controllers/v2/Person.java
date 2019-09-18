@@ -1,4 +1,4 @@
-package com.github.dnvriend.controllers.v2;
+package com.github.dnvriend.controller.v2;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

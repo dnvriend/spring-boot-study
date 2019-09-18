@@ -1,4 +1,4 @@
-package com.github.dnvriend.converters;
+package com.github.dnvriend.converter;
 
 import com.github.dnvriend.avro.Person;
 import java.io.ByteArrayOutputStream;

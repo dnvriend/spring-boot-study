@@ -1,7 +1,7 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controller;
 
-import com.github.dnvriend.repositories.Person;
-import com.github.dnvriend.repositories.PersonRepository;
+import com.github.dnvriend.repository.Person;
+import com.github.dnvriend.repository.PersonRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.datatype.joda.deser.IntervalDeserializer;
 import com.fasterxml.jackson.datatype.joda.deser.PeriodDeserializer;
 import com.fasterxml.jackson.datatype.joda.ser.DateTimeSerializer;
 import com.fasterxml.jackson.datatype.joda.ser.PeriodSerializer;
-import com.github.dnvriend.converters.StringToJodaDateTimeConverter;
+import com.github.dnvriend.converter.StringToJodaDateTimeConverter;
 import java.util.Collections;
 import java.util.List;
 import org.joda.time.Interval;

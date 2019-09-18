@@ -1,4 +1,4 @@
-package com.github.dnvriend.repositories;
+package com.github.dnvriend.repository;
 
 import com.github.dnvriend.domain.Todo;
 import lombok.NonNull;

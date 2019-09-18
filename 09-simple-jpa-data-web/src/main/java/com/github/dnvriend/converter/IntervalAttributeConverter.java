@@ -1,25 +1,25 @@
-package com.github.dnvriend.converters;
+package com.github.dnvriend.converter;
 
 import java.util.Objects;
 import java.util.Optional;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
-import org.joda.time.Period;
+import org.joda.time.Interval;
 
 @Converter
-public class PeriodAttributeConverter implements AttributeConverter<Period, String> {
+public class IntervalAttributeConverter implements AttributeConverter<Interval, String> {
 
     @Override
-    public String convertToDatabaseColumn(Period attribute) {
+    public String convertToDatabaseColumn(Interval attribute) {
         return Optional.ofNullable(attribute)
             .map(Objects::toString)
             .orElse(null);
     }
 
     @Override
-    public Period convertToEntityAttribute(String dbData) {
+    public Interval convertToEntityAttribute(String dbData) {
         return Optional.ofNullable(dbData)
-            .map(Period::parse)
+            .map(Interval::parse)
             .orElse(null);
     }
 }

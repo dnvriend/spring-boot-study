@@ -1,7 +1,7 @@
-package com.github.dnvriend.converters;
+package com.github.dnvriend.converter;
 
-import com.github.dnvriend.controllers.PersonData;
-import com.github.dnvriend.repositories.PersonEntity;
+import com.github.dnvriend.controller.PersonData;
+import com.github.dnvriend.repository.PersonEntity;
 import org.springframework.core.convert.converter.Converter;
 
 public class PersonDataToPersonEntityConverter implements Converter<PersonData, PersonEntity> {

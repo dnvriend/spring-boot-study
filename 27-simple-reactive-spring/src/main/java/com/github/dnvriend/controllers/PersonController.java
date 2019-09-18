@@ -1,7 +1,7 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controller;
 
 import com.github.dnvriend.domain.Person;
-import com.github.dnvriend.services.PersonService;
+import com.github.dnvriend.service.PersonService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;

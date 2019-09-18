@@ -1,7 +1,7 @@
-package com.github.dnvriend.converters;
+package com.github.dnvriend.converter;
 
-import com.github.dnvriend.controllers.PersonMvc;
-import com.github.dnvriend.repositories.PersonData;
+import com.github.dnvriend.controller.PersonMvc;
+import com.github.dnvriend.repository.PersonData;
 import java.util.Optional;
 import org.springframework.core.convert.converter.Converter;
 

@@ -1,7 +1,7 @@
-package com.github.dnvriend.repositories;
+package com.github.dnvriend.repository;
 
 import com.github.dnvriend.avro.Person;
-import com.github.dnvriend.converters.PersonAttributeConverter;
+import com.github.dnvriend.converter.PersonAttributeConverter;
 import java.io.Serializable;
 import javax.persistence.Convert;
 import javax.persistence.Entity;

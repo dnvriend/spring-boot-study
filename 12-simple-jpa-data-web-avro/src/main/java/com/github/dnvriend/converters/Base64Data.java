@@ -1,4 +1,4 @@
-package com.github.dnvriend.converters;
+package com.github.dnvriend.converter;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

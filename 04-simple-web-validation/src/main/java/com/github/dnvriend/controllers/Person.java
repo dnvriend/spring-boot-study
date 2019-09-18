@@ -1,4 +1,4 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controller;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;

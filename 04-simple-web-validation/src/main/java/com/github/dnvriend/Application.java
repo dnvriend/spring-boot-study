@@ -1,6 +1,6 @@
 package com.github.dnvriend;
 
-import com.github.dnvriend.controllers.Person;
+import com.github.dnvriend.controller.Person;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.boot.SpringApplication;

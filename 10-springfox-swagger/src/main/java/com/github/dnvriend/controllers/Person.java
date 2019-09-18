@@ -1,4 +1,4 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controller;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

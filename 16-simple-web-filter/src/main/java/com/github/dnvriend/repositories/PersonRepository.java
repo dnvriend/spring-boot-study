@@ -1,4 +1,4 @@
-package com.github.dnvriend.repositories;
+package com.github.dnvriend.repository;
 
 import java.util.Optional;
 import java.util.stream.Stream;

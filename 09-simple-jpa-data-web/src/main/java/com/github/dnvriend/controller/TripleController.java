@@ -1,9 +1,16 @@
-package com.github.dnvriend;
+package com.github.dnvriend.controller;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import com.github.dnvriend.dto.Value;
+import com.github.dnvriend.repository.FirstKey;
+import com.github.dnvriend.repository.SecondKey;
+import com.github.dnvriend.repository.ThirdKey;
+import com.github.dnvriend.service.TripleService;
+import com.github.dnvriend.repository.Triple;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -10,7 +10,7 @@ import static org.mockito.Mockito.*;
 import com.github.dnvriend.domain.Car;
 import com.github.dnvriend.domain.User;
 import com.github.dnvriend.exeptions.EngineNotStartedException;
-import com.github.dnvriend.services.UserService;
+import com.github.dnvriend.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

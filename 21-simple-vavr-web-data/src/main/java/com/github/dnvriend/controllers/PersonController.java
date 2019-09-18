@@ -1,7 +1,7 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controller;
 
-import com.github.dnvriend.repositories.PersonEntity;
-import com.github.dnvriend.repositories.PersonRepository;
+import com.github.dnvriend.repository.PersonEntity;
+import com.github.dnvriend.repository.PersonRepository;
 import com.github.dnvriend.status.ResourceNotFoundException;
 import io.vavr.collection.List;
 import io.vavr.collection.Seq;

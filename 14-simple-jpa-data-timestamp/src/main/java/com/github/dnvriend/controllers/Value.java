@@ -1,4 +1,4 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controller;
 
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;

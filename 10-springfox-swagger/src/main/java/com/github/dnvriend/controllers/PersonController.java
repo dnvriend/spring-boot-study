@@ -1,4 +1,4 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controller;
 
 import com.github.dnvriend.status.ResourceNotFoundException;
 import io.swagger.annotations.Api;

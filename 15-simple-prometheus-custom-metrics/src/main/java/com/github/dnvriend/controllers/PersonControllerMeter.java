@@ -1,4 +1,4 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controller;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.Collection;

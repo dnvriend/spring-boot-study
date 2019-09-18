@@ -1,23 +1,19 @@
-package com.github.dnvriend;
+package com.github.dnvriend.repository;
 
-import com.github.dnvriend.converters.DateTimeAttributeConverter;
-import javax.persistence.ColumnResult;
-import javax.persistence.ConstructorResult;
-import javax.persistence.Convert;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.SqlResultSetMapping;
+import com.github.dnvriend.converter.DateTimeAttributeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.joda.time.DateTime;
 
+import javax.persistence.*;
+
 @SqlResultSetMapping(
     name="FirstKeyResult",
     classes={
         @ConstructorResult(
-            targetClass=FirstKey.class,
+            targetClass= FirstKey.class,
             columns={
                 @ColumnResult(name="id_k1", type=String.class)}
         )

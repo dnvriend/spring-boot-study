@@ -1,13 +1,15 @@
-package com.github.dnvriend;
+package com.github.dnvriend.service;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
+import com.github.dnvriend.repository.Triple;
+import com.github.dnvriend.repository.TripleKeyId;
+import com.github.dnvriend.repository.TripleRepository;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;

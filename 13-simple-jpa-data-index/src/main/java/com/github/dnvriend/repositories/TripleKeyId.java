@@ -1,6 +1,6 @@
-package com.github.dnvriend.repositories;
+package com.github.dnvriend.repository;
 
-import com.github.dnvriend.converters.DateTimeAttributeConverter;
+import com.github.dnvriend.converter.DateTimeAttributeConverter;
 import java.io.Serializable;
 import javax.persistence.Convert;
 import javax.persistence.Embeddable;

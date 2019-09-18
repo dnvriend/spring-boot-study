@@ -1,7 +1,7 @@
 package com.github.dnvriend;
 
-import com.github.dnvriend.services.NameService;
-import com.github.dnvriend.services.UserService;
+import com.github.dnvriend.service.NameService;
+import com.github.dnvriend.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;

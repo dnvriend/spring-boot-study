@@ -1,6 +1,6 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controller;
 
-import com.github.dnvriend.repositories.PersonRepository;
+import com.github.dnvriend.repository.PersonRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;

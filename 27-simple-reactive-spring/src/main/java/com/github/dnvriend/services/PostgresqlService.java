@@ -1,4 +1,4 @@
-package com.github.dnvriend.services;
+package com.github.dnvriend.service;
 
 import org.springframework.data.r2dbc.core.DatabaseClient;
 

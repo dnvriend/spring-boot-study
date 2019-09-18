@@ -1,7 +1,7 @@
 package com.github.dnvriend.config;
 
-import com.github.dnvriend.converters.PersonDataToPersonEntityConverter;
-import com.github.dnvriend.converters.PersonEntityToPersonDataConverter;
+import com.github.dnvriend.converter.PersonDataToPersonEntityConverter;
+import com.github.dnvriend.converter.PersonEntityToPersonDataConverter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

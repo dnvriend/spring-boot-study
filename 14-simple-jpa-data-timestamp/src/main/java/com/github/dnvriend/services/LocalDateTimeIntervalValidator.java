@@ -1,4 +1,4 @@
-package com.github.dnvriend.services;
+package com.github.dnvriend.service;
 
 import java.time.LocalDateTime;
 import org.springframework.http.HttpStatus;

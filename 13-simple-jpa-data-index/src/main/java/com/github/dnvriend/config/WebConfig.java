@@ -1,7 +1,7 @@
 package com.github.dnvriend.config;
 
-import com.github.dnvriend.converters.StringToJodaDateTimeConverter;
-import com.github.dnvriend.converters.TripleToValueConverter;
+import com.github.dnvriend.converter.StringToJodaDateTimeConverter;
+import com.github.dnvriend.converter.TripleToValueConverter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

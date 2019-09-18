@@ -1,4 +1,4 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controller;
 
 import com.github.dnvriend.domain.Item;
 import org.springframework.web.bind.annotation.GetMapping;

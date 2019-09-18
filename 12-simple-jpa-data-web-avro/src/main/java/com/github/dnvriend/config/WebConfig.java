@@ -1,9 +1,9 @@
 package com.github.dnvriend.config;
 
-import com.github.dnvriend.converters.Base64DataToBytesConverter;
-import com.github.dnvriend.converters.BytesToBase64DataConverter;
-import com.github.dnvriend.converters.PersonDataToPersonMvcConverter;
-import com.github.dnvriend.converters.PersonMvcToPersonDataConverter;
+import com.github.dnvriend.converter.Base64DataToBytesConverter;
+import com.github.dnvriend.converter.BytesToBase64DataConverter;
+import com.github.dnvriend.converter.PersonDataToPersonMvcConverter;
+import com.github.dnvriend.converter.PersonMvcToPersonDataConverter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

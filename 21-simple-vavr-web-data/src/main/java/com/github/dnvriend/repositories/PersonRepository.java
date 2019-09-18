@@ -1,4 +1,4 @@
-package com.github.dnvriend.repositories;
+package com.github.dnvriend.repository;
 
 import io.vavr.collection.Seq;
 import io.vavr.control.Option;

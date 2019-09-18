@@ -1,7 +1,7 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controller;
 
-import com.github.dnvriend.services.LocalDateTimeIntervalValidator;
-import com.github.dnvriend.services.TripleService;
+import com.github.dnvriend.service.LocalDateTimeIntervalValidator;
+import com.github.dnvriend.service.TripleService;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;

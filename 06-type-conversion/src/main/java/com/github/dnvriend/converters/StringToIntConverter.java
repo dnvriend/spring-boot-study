@@ -1,4 +1,4 @@
-package com.github.dnvriend.converters;
+package com.github.dnvriend.converter;
 
 import org.springframework.core.convert.converter.Converter;
 

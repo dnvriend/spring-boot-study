@@ -1,4 +1,4 @@
-package com.github.dnvriend;
+package com.github.dnvriend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,8 +1,8 @@
-package com.github.dnvriend.services;
+package com.github.dnvriend.service;
 
-import com.github.dnvriend.repositories.Triple;
-import com.github.dnvriend.repositories.TripleKeyId;
-import com.github.dnvriend.repositories.TripleRepository;
+import com.github.dnvriend.repository.Triple;
+import com.github.dnvriend.repository.TripleKeyId;
+import com.github.dnvriend.repository.TripleRepository;
 import java.util.Optional;
 import java.util.stream.Stream;
 import org.joda.time.DateTime;

@@ -1,8 +1,8 @@
 package com.github.dnvriend;
 
-import com.github.dnvriend.repositories.TodoRepository;
-import com.github.dnvriend.services.PostgresqlService;
-import com.github.dnvriend.services.TodoService;
+import com.github.dnvriend.repository.TodoRepository;
+import com.github.dnvriend.service.PostgresqlService;
+import com.github.dnvriend.service.TodoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

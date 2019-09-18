@@ -1,7 +1,7 @@
-package com.github.dnvriend.converters;
+package com.github.dnvriend.converter;
 
-import com.github.dnvriend.controllers.Value;
-import com.github.dnvriend.repositories.Triple;
+import com.github.dnvriend.controller.Value;
+import com.github.dnvriend.repository.Triple;
 import org.springframework.core.convert.converter.Converter;
 
 public class TripleToValueConverter implements Converter<Triple, Value> {

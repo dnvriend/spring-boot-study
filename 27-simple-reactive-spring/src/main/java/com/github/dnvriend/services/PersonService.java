@@ -1,4 +1,4 @@
-package com.github.dnvriend.services;
+package com.github.dnvriend.service;
 
 import com.github.dnvriend.domain.Person;
 import org.springframework.stereotype.Service;

@@ -1,10 +1,10 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.github.dnvriend.repositories.PersonEntity;
-import com.github.dnvriend.repositories.PersonEntityAssert;
-import com.github.dnvriend.repositories.PersonRepository;
+import com.github.dnvriend.repository.PersonEntity;
+import com.github.dnvriend.repository.PersonEntityAssert;
+import com.github.dnvriend.repository.PersonRepository;
 import io.vavr.collection.List;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package com.github.dnvriend;
+package com.github.dnvriend.repository;
 
 public class FirstKey {
     public static String SELECT_ALL = "select id_k1, id_k2, id_k3 from triple";

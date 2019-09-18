@@ -1,4 +1,4 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;

@@ -1,7 +1,7 @@
-package com.github.dnvriend.controllers;
+package com.github.dnvriend.controller;
 
-import com.github.dnvriend.services.DateTimeIntervalValidator;
-import com.github.dnvriend.services.TripleService;
+import com.github.dnvriend.service.DateTimeIntervalValidator;
+import com.github.dnvriend.service.TripleService;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.joda.time.DateTime;
