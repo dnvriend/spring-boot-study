@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import com.github.dnvriend.repository.Triple;
 import com.github.dnvriend.repository.TripleKeyId;
 import com.github.dnvriend.repository.TripleRepository;
+import com.github.dnvriend.util.StreamIterable;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;

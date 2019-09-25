@@ -27,7 +27,7 @@
         <!--        <module>06-type-conversion</module>-->
         <!--        <module>07-simple-actuator</module>-->
         <!--        <module>08-simple-prometheus-grafana</module>-->
-<!--                <module>09-simple-jpa-data-web</module>-->
+                <module>09-simple-jpa-data-web</module>
         <!--        <module>10-springfox-swagger</module>-->
         <!--        <module>11-simple-web-versioning</module>-->
         <!--        <module>12-simple-jpa-data-web-avro</module>-->
@@ -45,7 +45,7 @@
         <!--        <module>24-simple-starter</module>-->
 <!--        <module>25-simple-scala</module>-->
         <!--        <module>26-simple-spring-shell</module>-->
-                <module>27-simple-reactive-spring</module>
+<!--                <module>27-simple-reactive-spring</module>-->
         <!--        <module>28-simple-spring-interceptor</module>-->
         <!--         <module>29-simple-spring-bom</module>-->
         <!--         <module>30-simple-groovy-spring-shell</module>-->
