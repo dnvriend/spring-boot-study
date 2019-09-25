@@ -1,5 +1,12 @@
 # 09-simple-jpa-data-web
 
+## h2 settings
+
+- IGNORECASE: case insensitive columns
+- DATABASE_TO_LOWER: When set to true unquoted identifiers and short name of database are converted to lower case
+- DATABASE_TO_UPPER: When set to true unquoted identifiers and short name of database are converted to upper case
+- CASE_INSENSITIVE_IDENTIFIERS: When set to true, all identifier names (table names, column names) are case insensitive
+
 ## Resources
 - [Joda-Time-Hibernate](https://www.joda.org/joda-time-hibernate/userguide.html)
 - [Spring Type Conversion](https://www.baeldung.com/spring-type-conversions)
@@ -12,4 +19,14 @@
 - [JPA - Data Query by Example](https://www.baeldung.com/spring-data-query-by-example)
 - [spring-data-jpa - Reference](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
 - [Spring DevTools Baeldung](https://www.baeldung.com/spring-boot-devtools)
-- 
+- [H2 DbSettings](https://www.h2database.com/javadoc/org/h2/engine/DbSettings.html)
+- [MariaDB4j](https://github.com/vorburger/MariaDB4j)
+- [Streaming MySQL Results Using Java 8 Streams and Spring Data JPA](http://knes1.github.io/blog/2015/2015-10-19-streaming-mysql-results-using-java8-streams-and-spring-data.html)
+- [Spring Data Java 8 Support](https://www.baeldung.com/spring-data-java-8)
+- [JPA 2.2’s new getResultStream() method and how you should NOT use it](https://thoughts-on-java.org/jpa-2-2s-new-stream-method-and-how-you-should-not-use-it/)
+- [Java 8 Streams with JPA](http://backcountry.github.io/2014/12/23/Java-8-Streams-with-JPA/)
+- [Best Performance Practices for Hibernate 5 and Spring Boot 2](https://dzone.com/articles/50-best-performance-practices-for-hibernate-5-amp)
+- [How can I turn a Stream into an Iterable?](http://www.lambdafaq.org/how-do-i-turn-a-stream-into-an-iterable/)
+
+## Books
+- [Java Persistence Performance Illustrated Guide](https://leanpub.com/java-persistence-performance-illustrated-guide)

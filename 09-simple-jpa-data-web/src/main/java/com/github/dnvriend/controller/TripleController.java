@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.github.dnvriend.dto.Value;
+import com.github.dnvriend.model.Value;
 import com.github.dnvriend.repository.FirstKey;
 import com.github.dnvriend.repository.SecondKey;
 import com.github.dnvriend.repository.ThirdKey;
