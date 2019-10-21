@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-web
+spec:
+  selector:
+    matchLabels:
+      app: simple-web
+      component: deployment
+  template:
+    metadata:
+      labels:
+        app: simple-web
+        component: deployment
+    spec:
+      containers:
+        - name: simple-web
+          image: simple-web
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+              name: http
+        - name: authenticator
+          image: nginx:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 443
+              name: https
+          volumeMounts:
+            - mountPath: /etc/nginx/conf.d
+              name: nginx-config
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-default-conf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-web-service
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 80
+#    - name: https
+#      port: 443
+#      protocol: TCP
+#      targetPort: 443
+  selector:
+    app: simple-web
+    component: deployment

@@ -31,6 +31,24 @@ public HttpServletRequest buildMockRequestWithAttribute() {
 }
 ```
 
+## Arrays
+
+```java
+void quuz(int a, int b, String[] baz) {
+        
+}
+
+void bar(int a, int b, String... baz) {
+    String s = baz[0];
+}
+
+void quz() {
+    String[] arr = new String[]{""};
+    bar(1, 2,"a", "b");
+    bar(1, 2, arr);
+    bar(1, 2, ImmutableList.of("foo").toArray(new String[1]));
+}
+```
 
 ## Resourcs
 - [Mockito void methods](https://www.baeldung.com/mockito-void-methods)

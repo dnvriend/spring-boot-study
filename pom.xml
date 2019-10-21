@@ -20,14 +20,14 @@
 
     <modules>
         <!--        <module>01-simple</module>-->
-<!--                <module>02-simple-web</module>-->
+                <module>02-simple-web</module>
 <!--                <module>03-simple-validation</module>-->
 <!--                <module>04-simple-web-validation</module>-->
         <!--        <module>05-simple-spel</module>-->
         <!--        <module>06-type-conversion</module>-->
         <!--        <module>07-simple-actuator</module>-->
         <!--        <module>08-simple-prometheus-grafana</module>-->
-                <module>09-simple-jpa-data-web</module>
+<!--                <module>09-simple-jpa-data-web</module>-->
         <!--        <module>10-springfox-swagger</module>-->
         <!--        <module>11-simple-web-versioning</module>-->
         <!--        <module>12-simple-jpa-data-web-avro</module>-->
@@ -53,7 +53,8 @@
         <!--         <module>32-simple-javadoc</module>-->
         <!--         <module>35-simple-lifecycle</module>-->
         <!--         <module>36-simple-aop</module>-->
-        <!--         <module>37-simple-guava</module>-->
+          <!--         <module>37-simple-guava</module> -->
+<!--                 <module>38-simple-akka-streams-java</module>-->
     </modules>
 
     <dependencyManagement>

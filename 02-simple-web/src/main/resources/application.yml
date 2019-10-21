@@ -1,5 +1,7 @@
 server:
   port: 8080
+#  servlet:
+#    context-path: '/api' # set the base url to /api for all controllers, which means that swagger will also be moved to /api/swagger-ui.html
 
 logging:
   level:

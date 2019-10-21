@@ -27,6 +27,10 @@
 - [Java 8 Streams with JPA](http://backcountry.github.io/2014/12/23/Java-8-Streams-with-JPA/)
 - [Best Performance Practices for Hibernate 5 and Spring Boot 2](https://dzone.com/articles/50-best-performance-practices-for-hibernate-5-amp)
 - [How can I turn a Stream into an Iterable?](http://www.lambdafaq.org/how-do-i-turn-a-stream-into-an-iterable/)
+- [Spring JPA query streaming](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-streaming)
+- [TryWithResources](https://dzone.com/articles/java-code-bytes-be-resourceful-with-try-with-resou)
+- [Spring Streams Memory Efficiency](https://www.airpair.com/java/posts/spring-streams-memory-efficiency)
+- [Streaming data with spring boot restful service](https://dzone.com/articles/streaming-data-with-spring-boot-restful-web-servic)
 
 ## Books
 - [Java Persistence Performance Illustrated Guide](https://leanpub.com/java-persistence-performance-illustrated-guide)

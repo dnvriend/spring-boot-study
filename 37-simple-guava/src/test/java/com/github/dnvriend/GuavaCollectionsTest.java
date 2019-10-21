@@ -7,6 +7,9 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import com.google.common.collect.Streams;
 import org.junit.jupiter.api.Test;
 
 class GuavaCollectionsTest {
@@ -25,5 +28,16 @@ class GuavaCollectionsTest {
     void createList() {
         List<String> xs = ImmutableList.<String>builder().add("foo", "bar").build();
         assertThat(xs).contains("foo", "bar");
+    }
+
+    void mergeMaps() {
+        Map<String, Map<String, List<Integer>>> kv1 = ImmutableMap.of("foo", ImmutableMap.of("bar", ImmutableList.of(1)));
+        Map<String, Map<String, List<Integer>>> kv2 = ImmutableMap.of("foo", ImmutableMap.of("bar", ImmutableList.of(2)));
+
+        ImmutableList<String> foo = ImmutableList.of("foo");
+
+        Streams.
+
+
     }
 }
