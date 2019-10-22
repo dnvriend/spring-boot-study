@@ -1,0 +1,100 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-neo4j
+spec:
+  selector:
+    matchLabels:
+      app: simple-neo4j
+      component: deployment
+  template:
+    metadata:
+      labels:
+        app: simple-neo4j
+        component: deployment
+    spec:
+      containers:
+        - name: neo4j
+          image: neo4j:3.5.4-enterprise
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: NEO4J_dbms_security_auth__enabled
+              value: "false"
+            - name: NEO4J_ACCEPT_LICENSE_AGREEMENT
+              value: "yes"
+          ports:
+            - containerPort: 7473
+              name: https
+            - containerPort: 7474
+              name: http
+            - containerPort: 7687
+              name: bolt
+            - containerPort: 6000
+              name: tx
+        - name: authenticator
+          image: nginx:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+            - containerPort: 443
+              name: https
+          volumeMounts:
+            - mountPath: /etc/nginx/conf.d
+              name: nginx-neo4j
+      volumes:
+        - name: nginx-neo4j
+          configMap:
+            name: nginx-neo4j-conf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo4j-http
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+#      targetPort: 7474 # map directly to neo4j http port without security
+      targetPort: 80 # map to nginx proxy http port 80 so that security will be used
+#    - name: https
+#      port: 443
+#      protocol: TCP
+#      targetPort: 7473
+  selector:
+    app: simple-neo4j
+    component: deployment
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo4j-bolt
+spec:
+  type: NodePort
+  ports:
+    - name: bolt
+      port: 443
+      protocol: TCP
+      targetPort: 7687
+  selector:
+    app: simple-neo4j
+    component: deployment
+
+#
+# $ kubectl get svc
+# NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+# kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP                      6d
+# neo4j-bolt   NodePort    10.99.68.69      <none>        443:30043/TCP                4s
+# neo4j-http   NodePort    10.101.216.187   <none>        80:32264/TCP,443:32309/TCP   5s
+#
+# Based on the node port above, connect to the following:
+#
+# Open a browser to: http://localhost:32264/browser/
+# Change the connect url to: bolt://localhost:30043
+# user:pwd = neo4j:neo4j
+#
+# If you want to get the logs for the pod:
+# $ kubectl logs simple-neo4j-54975c5ff6-9mxd7 -c neo4j

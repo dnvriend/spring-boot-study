@@ -47,6 +47,16 @@ k-show-configmap: ## show the configmap
 k-remove-configmap: ## remove the configmap
 	kubectl delete configmaps nginx-default-conf
 
+k-create-configmap-neo4j: ## create neo4j configmap from dir
+	kubectl create configmap nginx-neo4j-conf --from-file=nginx-neo4j/
+
+k-deploy-neo4j: k-create-configmap-neo4j ## deploy neo4j
+	kubectl apply -f deployment-neo4j.yaml
+
+k-remove-neo4j: ## delete neo4j
+	kubectl delete -f deployment-neo4j.yaml
+	kubectl delete configmaps nginx-neo4j-conf
+
 nginx-reload: ## reload the nginx config
 	nginx -s reload
 
